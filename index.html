@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belgitour - Roteiros Personalizados</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #8B4513; /* Marrom para combinar com o tom "terroso" da Belgitour */
-            --secondary-color: #D2B48C; /* Bege claro */
-            --accent-color: #A0522D; /* Marrom mais escuro */
+            --primary-color: #A0522D; /* Marrom terroso, elegante */
+            --secondary-color: #D2B48C; /* Bege claro, suave */
+            --accent-color: #8B4513; /* Marrom mais escuro para detalhes */
             --text-color: #333;
             --light-text-color: #666;
             --background-color: #FDF5E6; /* Creme suave */
@@ -17,6 +17,8 @@
             --border-color: #E0E0E0;
             --success-color: #28a745;
             --error-color: #dc3545;
+            --shadow-light: rgba(0,0,0,0.05);
+            --shadow-medium: rgba(0,0,0,0.1);
         }
 
         body {
@@ -36,13 +38,20 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px var(--shadow-medium);
         }
 
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
+        }
+
+        header p {
+            margin: 0.2rem 0 0;
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
         .container {
@@ -50,14 +59,20 @@
             margin: 2rem auto;
             padding: 1.5rem;
             background-color: var(--card-background);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 12px; /* Bordas mais suaves */
+            box-shadow: 0 6px 20px var(--shadow-medium); /* Sombra mais pronunciada */
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         h2 {
             color: var(--primary-color);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
             margin-top: 0;
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 0.5rem;
@@ -66,7 +81,8 @@
 
         h3 {
             color: var(--accent-color);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
             margin-top: 1.5rem;
         }
 
@@ -75,6 +91,7 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--light-text-color);
+            text-align: left;
         }
 
         input[type="text"],
@@ -85,18 +102,31 @@
         textarea,
         select {
             width: calc(100% - 20px);
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 8px; /* Bordas mais suaves */
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
+            outline: none;
         }
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         .checkbox-group, .interest-group {
@@ -104,19 +134,21 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 1rem;
+            justify-content: center;
         }
 
         .checkbox-group label, .interest-group label {
             background-color: var(--secondary-color);
-            padding: 10px 15px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px; /* Mais arredondado */
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             font-weight: 400;
             color: var(--text-color);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .checkbox-group input[type="checkbox"], .interest-group input[type="checkbox"] {
@@ -126,49 +158,69 @@
         .checkbox-group input[type="checkbox"]:checked + label, .interest-group input[type="checkbox"]:checked + label {
             background-color: var(--primary-color);
             color: white;
+            box-shadow: 0 2px 8px var(--shadow-medium);
         }
 
         button {
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 20px;
+            padding: 14px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 10px var(--shadow-medium);
         }
 
         button:hover {
             background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .button-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 400px; /* Limita a largura dos botões em formulários */
+            gap: 15px;
         }
 
         .button-group button {
             margin-top: 0;
+            flex: 1;
+            font-size: 1rem;
+            padding: 12px 15px;
         }
 
         .button-group button:first-child {
             background-color: var(--secondary-color);
             color: var(--text-color);
+            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .button-group button:first-child:hover {
             background-color: #c0a080;
+            color: var(--text-color);
         }
 
-        .form-step {
+        .form-step, .home-screen {
             display: none;
+            width: 100%;
+            max-width: 600px; /* Limita a largura dos formulários */
+            margin: 0 auto;
+            text-align: left;
         }
 
-        .form-step.active {
+        .form-step.active, .home-screen.active {
             display: block;
         }
 
@@ -177,13 +229,15 @@
             margin-bottom: 1.5rem;
             font-weight: 600;
             color: var(--light-text-color);
+            font-size: 0.95rem;
         }
 
         .message {
             padding: 1rem;
             margin-bottom: 1rem;
-            border-radius: 4px;
+            border-radius: 8px;
             font-weight: 600;
+            text-align: center;
         }
 
         .message.success {
@@ -200,6 +254,10 @@
 
         .admin-panel, .client-view {
             display: none;
+            width: 100%;
+            max-width: 900px; /* Mais largo para o painel */
+            margin: 0 auto;
+            text-align: left;
         }
 
         .admin-panel.active, .client-view.active {
@@ -219,15 +277,18 @@
         }
 
         .client-code-input input {
-            width: 200px;
+            width: 220px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             letter-spacing: 2px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .client-code-input button {
             display: block;
-            margin: 1rem auto;
+            margin: 1.5rem auto;
         }
 
         .client-roteiro-display {
@@ -238,29 +299,30 @@
 
         .client-roteiro-display h3 {
             color: var(--primary-color);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
         }
 
         .client-roteiro-display .tabs {
             display: flex;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .client-roteiro-display .tab-button {
-            padding: 10px 15px;
+            padding: 12px 20px;
             cursor: pointer;
             border: none;
             background-color: transparent;
             font-weight: 600;
             color: var(--light-text-color);
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            font-size: 1rem;
         }
 
         .client-roteiro-display .tab-button.active {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
         }
 
         .client-roteiro-display .tab-content {
@@ -275,36 +337,39 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             background-color: #f9f9f9;
-            padding: 1rem;
-            border-radius: 4px;
+            padding: 1.5rem;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
         }
 
         .client-roteiro-display img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            margin-top: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow-medium);
         }
 
         .client-roteiro-display .hero-image {
             width: 100%;
-            height: 250px;
+            height: 300px; /* Altura maior para a hero image */
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
         }
 
         .client-roteiro-display .status-bar {
             background-color: var(--secondary-color);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
             color: var(--accent-color);
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px var(--shadow-light);
         }
 
         .client-roteiro-display .status-bar span {
@@ -314,35 +379,57 @@
         .client-roteiro-display .day-card {
             background-color: var(--card-background);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px var(--shadow-light);
         }
 
         .client-roteiro-display .day-card h4 {
             color: var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
             margin-top: 0;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .client-roteiro-display .day-card h5 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .client-roteiro-display .day-card p {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .client-roteiro-display .day-card ul {
             list-style: none;
             padding: 0;
+            margin-left: 1rem;
         }
 
         .client-roteiro-display .day-card ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .client-roteiro-display .day-card ul li::before {
+            content: '•';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
         }
 
         .client-roteiro-display .day-card ul li a {
             color: var(--primary-color);
             text-decoration: none;
+            font-weight: 600;
         }
 
         .client-roteiro-display .day-card ul li a:hover {
@@ -352,26 +439,30 @@
         .client-roteiro-display .day-card .tip {
             font-style: italic;
             color: var(--accent-color);
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--secondary-color);
         }
 
         .client-roteiro-display .section-title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
             border-bottom: 1px dashed var(--secondary-color);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
         }
 
         .client-roteiro-display .vouchers-list ul {
             list-style: disc;
-            padding-left: 20px;
+            padding-left: 25px;
         }
 
         .client-roteiro-display .vouchers-list ul li a {
             color: var(--primary-color);
             text-decoration: none;
+            font-weight: 600;
         }
 
         .client-roteiro-display .vouchers-list ul li a:hover {
@@ -381,10 +472,11 @@
         footer {
             text-align: center;
             padding: 1.5rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
             background-color: var(--primary-color);
             color: white;
             font-size: 0.9rem;
+            box-shadow: 0 -2px 4px var(--shadow-medium);
         }
 
         .admin-dashboard .client-list table {
@@ -395,14 +487,14 @@
 
         .admin-dashboard .client-list th, .admin-dashboard .client-list td {
             border: 1px solid var(--border-color);
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
 
         .admin-dashboard .client-list th {
             background-color: var(--secondary-color);
             color: var(--primary-color);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .admin-dashboard .client-list tr:nth-child(even) {
@@ -411,13 +503,15 @@
 
         .admin-dashboard .client-list button {
             background-color: var(--accent-color);
-            padding: 8px 12px;
-            font-size: 0.9rem;
+            padding: 10px 15px;
+            font-size: 0.95rem;
             margin-top: 0;
+            box-shadow: none;
         }
 
         .admin-dashboard .client-list button:hover {
             background-color: var(--primary-color);
+            transform: translateY(-1px);
         }
 
         .modal {
@@ -429,7 +523,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.6);
             justify-content: center;
             align-items: center;
         }
@@ -437,22 +531,22 @@
         .modal-content {
             background-color: var(--card-background);
             margin: auto;
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2.5rem;
+            border-radius: 12px;
             width: 90%;
-            max-width: 900px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 950px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             position: relative;
         }
 
         .close-button {
             color: #aaa;
             float: right;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             position: absolute;
-            top: 10px;
-            right: 20px;
+            top: 15px;
+            right: 25px;
             cursor: pointer;
         }
 
@@ -466,21 +560,26 @@
         .modal-content h3 {
             margin-top: 0;
             color: var(--primary-color);
+            font-size: 1.6rem;
         }
 
         .modal-content textarea {
             width: calc(100% - 20px);
-            min-height: 300px;
-            margin-bottom: 1rem;
+            min-height: 350px;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .modal-content .button-group {
             justify-content: flex-end;
-            gap: 10px;
+            gap: 15px;
         }
 
         .modal-content .button-group button {
             margin-top: 0;
+            font-size: 1rem;
+            padding: 12px 20px;
         }
 
         .modal-content .button-group button:first-child {
@@ -490,49 +589,53 @@
 
         .modal-content .button-group button:first-child:hover {
             background-color: #c0a080;
+            color: var(--text-color);
         }
 
         .admin-dashboard .stats {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .admin-dashboard .stat-card {
             background-color: var(--secondary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 1.8rem;
+            border-radius: 10px;
             text-align: center;
             flex: 1;
-            min-width: 180px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-width: 200px;
+            box-shadow: 0 4px 12px var(--shadow-light);
         }
 
         .admin-dashboard .stat-card h4 {
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 0.8rem 0;
             color: var(--primary-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .admin-dashboard .stat-card p {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent-color);
         }
 
         .admin-dashboard .url-config {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
             background-color: #f9f9f9;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px var(--shadow-light);
         }
 
         .admin-dashboard .url-config h3 {
             margin-top: 0;
+            font-size: 1.5rem;
         }
 
         .admin-dashboard .url-config input {
@@ -540,12 +643,15 @@
         }
 
         .admin-dashboard .url-config button {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .admin-dashboard .logout-button {
             background-color: var(--error-color);
             margin-top: 1rem;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            box-shadow: none;
         }
 
         .admin-dashboard .logout-button:hover {
@@ -555,47 +661,113 @@
         .admin-login .error-message {
             color: var(--error-color);
             font-weight: 600;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             text-align: center;
         }
 
         .admin-login .login-form {
             text-align: center;
+            margin-top: 2rem;
+        }
+
+        .admin-login .login-form label {
+            text-align: center;
         }
 
         .admin-login .login-form input {
-            width: 250px;
-            margin-bottom: 1rem;
+            width: 280px;
+            margin-bottom: 1.5rem;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .admin-login .login-form button {
-            width: 250px;
+            width: 280px;
+            padding: 15px;
+            font-size: 1.1rem;
         }
 
-        .admin-login .url-config-pre-login { /* Novo estilo para o campo URL antes do login */
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+        .admin-login .url-config-pre-login {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
             background-color: #f9f9f9;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            text-align: left; /* Alinha o texto à esquerda */
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 2px 8px var(--shadow-light);
         }
 
         .admin-login .url-config-pre-login h3 {
             margin-top: 0;
-            text-align: center; /* Centraliza o título */
+            text-align: center;
+            font-size: 1.5rem;
         }
 
         .admin-login .url-config-pre-login input {
             width: calc(100% - 20px);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .admin-login .url-config-pre-login button {
-            margin-top: 1rem;
-            width: auto; /* Permite que o botão se ajuste ao conteúdo */
-            display: block; /* Ocupa a largura total para centralizar */
+            margin-top: 1.5rem;
+            width: auto;
+            display: block;
             margin-left: auto;
             margin-right: auto;
+            padding: 12px 20px;
+            font-size: 1rem;
+        }
+
+        /* Home Screen Specific Styles */
+        .home-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .home-screen h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--accent-color);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .home-screen p {
+            font-size: 1.2rem;
+            color: var(--light-text-color);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .home-screen .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px var(--shadow-medium);
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        .home-screen .cta-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .home-screen .cta-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px var(--shadow-light);
         }
 
     </style>
@@ -607,13 +779,19 @@
     </header>
 
     <main class="container">
+        <!-- Home Screen -->
+        <section id="home" class="home-screen active">
+            <h2>Sua Próxima Aventura Começa Aqui</h2>
+            <p>Descubra roteiros personalizados que transformam sua viagem em uma experiência inesquecível. Deixe a Belgitour planejar cada detalhe para você.</p>
+            <button type="button" class="cta-button" onclick="startForm()">Criar Meu Roteiro Personalizado</button>
+        </section>
+
         <!-- Formulário do Cliente -->
         <section id="form-cliente" class="form-section">
             <div class="progress-indicator"></div>
 
             <div id="step1" class="form-step active">
-                <h2>✨ Roteiro Personalizado com IA</h2>
-                <p>Sua viagem dos <strong>sonhos</strong>, planejada por especialistas</p>
+                <h2>Seu Roteiro Exclusivo</h2>
                 <p>Responda às perguntas abaixo e nossa equipe criará um roteiro exclusivo, revisado e personalizado para você.</p>
                 <div class="progress-indicator">1 DE 7</div>
                 <h3>Seus dados</h3>
@@ -880,7 +1058,7 @@
                     <span class="close-button" onclick="closeModal()">×</span>
                     <h3>Roteiro</h3>
                     <p>Cliente: <strong id="modalClientName"></strong></p>
-                    <button type="button" onclick="generateRoteiro()">✨ Gerar Roteiro com IA (pode levar 30–90 seg para viagens longas)</button>
+                    <button type="button" onclick="generateRoteiro()">✨ Gerar Roteiro (pode levar 30–90 seg para viagens longas)</button>
                     <label for="roteiroTextarea">📝 Roteiro (edite livremente antes de aprovar):</label>
                     <textarea id="roteiroTextarea"></textarea>
                     <label for="vouchersTextarea">📄 Documentos, Vouchers & Links de Reserva:</label>
@@ -973,7 +1151,7 @@
 
         function updateHash() {
             const hash = window.location.hash;
-            document.querySelectorAll('.form-section, .admin-panel, .client-view').forEach(section => {
+            document.querySelectorAll('.home-screen, .form-section, .admin-panel, .client-view').forEach(section => {
                 section.style.display = 'none';
             });
 
@@ -994,10 +1172,18 @@
                 document.getElementById('roteiro').style.display = 'block';
                 document.getElementById('clientRoteiroDisplay').style.display = 'none';
                 document.getElementById('client-error').style.display = 'none';
-            } else {
+            } else if (hash === '#form') { // Nova hash para o formulário
                 document.getElementById('form-cliente').style.display = 'block';
                 showStep(currentStep);
             }
+            else { // Default para a tela inicial
+                document.getElementById('home').style.display = 'flex';
+            }
+        }
+
+        function startForm() {
+            window.location.hash = '#form';
+            updateHash();
         }
 
         function showStep(step) {
@@ -1018,6 +1204,9 @@
         function prevStep() {
             if (currentStep > 1) {
                 showStep(currentStep - 1);
+            } else { // Se estiver no primeiro passo do formulário, volta para a home
+                window.location.hash = '#home';
+                updateHash();
             }
         }
 
@@ -1271,7 +1460,7 @@
                 return;
             }
 
-            const confirmGenerate = confirm('Tem certeza que deseja gerar o roteiro com IA? Isso pode sobrescrever o conteúdo atual.');
+            const confirmGenerate = confirm('Tem certeza que deseja gerar o roteiro? Isso pode sobrescrever o conteúdo atual.');
             if (!confirmGenerate) return;
 
             const generateButton = document.querySelector('#roteiroModal button');
@@ -1303,7 +1492,7 @@
             } catch (error) {
                 alert(`Erro de conexão ao gerar roteiro: ${error.message}`);
             } finally {
-                generateButton.textContent = '✨ Gerar Roteiro com IA';
+                generateButton.textContent = '✨ Gerar Roteiro';
                 generateButton.disabled = false;
             }
         }
