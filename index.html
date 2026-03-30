@@ -18,1526 +18,1534 @@
             --success-color: #28a745;
             --error-color: #dc3545;
         }
-    body {
-        font-family: 'Montserrat', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    header {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 1rem 0;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-        margin: 0;
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 1.5rem;
-        background-color: var(--card-background);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        flex-grow: 1;
-    }
-
-    h2 {
-        color: var(--primary-color);
-        font-size: 1.6rem;
-        margin-top: 0;
-        border-bottom: 2px solid var(--secondary-color);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    h3 {
-        color: var(--accent-color);
-        font-size: 1.3rem;
-        margin-top: 1.5rem;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: var(--light-text-color);
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="date"],
-    input[type="password"],
-    textarea,
-    select {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1rem;
-        box-sizing: border-box;
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 100px;
-    }
-
-    .checkbox-group, .interest-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 1rem;
-    }
-
-    .checkbox-group label, .interest-group label {
-        background-color: var(--secondary-color);
-        padding: 10px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        font-weight: 400;
-        color: var(--text-color);
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .checkbox-group input[type="checkbox"], .interest-group input[type="checkbox"] {
-        display: none;
-    }
-
-    .checkbox-group input[type="checkbox"]:checked + label, .interest-group input[type="checkbox"]:checked + label {
-        background-color: var(--primary-color);
-        color: white;
-    }
-
-    button {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
-        margin-top: 1rem;
-    }
-
-    button:hover {
-        background-color: var(--accent-color);
-    }
-
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1.5rem;
-    }
-
-    .button-group button {
-        margin-top: 0;
-    }
-
-    .button-group button:first-child {
-        background-color: var(--secondary-color);
-        color: var(--text-color);
-    }
-
-    .button-group button:first-child:hover {
-        background-color: #c0a080;
-    }
-
-    .form-step {
-        display: none;
-    }
-
-    .form-step.active {
-        display: block;
-    }
-
-    .progress-indicator {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        font-weight: 600;
-        color: var(--light-text-color);
-    }
-
-    .message {
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border-radius: 4px;
-        font-weight: 600;
-    }
-
-    .message.success {
-        background-color: #d4edda;
-        color: var(--success-color);
-        border: 1px solid #c3e6cb;
-    }
-
-    .message.error {
-        background-color: #f8d7da;
-        color: var(--error-color);
-        border: 1px solid #f5c6cb;
-    }
-
-    .admin-panel, .client-view {
-        display: none;
-    }
-
-    .admin-panel.active, .client-view.active {
-        display: block;
-    }
-
-    .admin-login, .admin-dashboard {
-        display: none;
-    }
-
-    .admin-login.active, .admin-dashboard.active {
-        display: block;
-    }
-
-    .client-code-input {
-        text-align: center;
-    }
-
-    .client-code-input input {
-        width: 200px;
-        text-align: center;
-        font-size: 1.2rem;
-        letter-spacing: 2px;
-    }
-
-    .client-code-input button {
-        display: block;
-        margin: 1rem auto;
-    }
-
-    .client-roteiro-display {
-        margin-top: 2rem;
-        border-top: 1px solid var(--border-color);
-        padding-top: 1.5rem;
-    }
-
-    .client-roteiro-display h3 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .client-roteiro-display .tabs {
-        display: flex;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 1rem;
-    }
-
-    .client-roteiro-display .tab-button {
-        padding: 10px 15px;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-        font-weight: 600;
-        color: var(--light-text-color);
-        transition: color 0.3s ease;
-    }
-
-    .client-roteiro-display .tab-button.active {
-        color: var(--primary-color);
-        border-bottom: 2px solid var(--primary-color);
-    }
-
-    .client-roteiro-display .tab-content {
-        display: none;
-    }
-
-    .client-roteiro-display .tab-content.active {
-        display: block;
-    }
-
-    .client-roteiro-display pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        background-color: #f9f9f9;
-        padding: 1rem;
-        border-radius: 4px;
-        border: 1px solid var(--border-color);
-    }
-
-    .client-roteiro-display img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-top: 1rem;
-    }
-
-    .client-roteiro-display .hero-image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-    }
-
-    .client-roteiro-display .status-bar {
-        background-color: var(--secondary-color);
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        color: var(--accent-color);
-    }
-
-    .client-roteiro-display .status-bar span {
-        display: block;
-    }
-
-    .client-roteiro-display .day-card {
-        background-color: var(--card-background);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .client-roteiro-display .day-card h4 {
-        color: var(--primary-color);
-        font-size: 1.2rem;
-        margin-top: 0;
-        margin-bottom: 1rem;
-    }
-
-    .client-roteiro-display .day-card p {
-        margin-bottom: 0.5rem;
-    }
-
-    .client-roteiro-display .day-card ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .client-roteiro-display .day-card ul li {
-        margin-bottom: 0.5rem;
-    }
-
-    .client-roteiro-display .day-card ul li a {
-        color: var(--primary-color);
-        text-decoration: none;
-    }
-
-    .client-roteiro-display .day-card ul li a:hover {
-        text-decoration: underline;
-    }
-
-    .client-roteiro-display .day-card .tip {
-        font-style: italic;
-        color: var(--accent-color);
-        margin-top: 0.5rem;
-    }
-
-    .client-roteiro-display .section-title {
-        font-size: 1.3rem;
-        color: var(--primary-color);
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px dashed var(--secondary-color);
-        padding-bottom: 0.5rem;
-    }
-
-    .client-roteiro-display .vouchers-list ul {
-        list-style: disc;
-        padding-left: 20px;
-    }
-
-    .client-roteiro-display .vouchers-list ul li a {
-        color: var(--primary-color);
-        text-decoration: none;
-    }
-
-    .client-roteiro-display .vouchers-list ul li a:hover {
-        text-decoration: underline;
-    }
-
-    footer {
-        text-align: center;
-        padding: 1.5rem;
-        margin-top: 2rem;
-        background-color: var(--primary-color);
-        color: white;
-        font-size: 0.9rem;
-    }
-
-    .admin-dashboard .client-list table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1.5rem;
-    }
-
-    .admin-dashboard .client-list th, .admin-dashboard .client-list td {
-        border: 1px solid var(--border-color);
-        padding: 10px;
-        text-align: left;
-    }
-
-    .admin-dashboard .client-list th {
-        background-color: var(--secondary-color);
-        color: var(--primary-color);
-        font-weight: 600;
-    }
-
-    .admin-dashboard .client-list tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    .admin-dashboard .client-list button {
-        background-color: var(--accent-color);
-        padding: 8px 12px;
-        font-size: 0.9rem;
-        margin-top: 0;
-    }
-
-    .admin-dashboard .client-list button:hover {
-        background-color: var(--primary-color);
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5);
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal-content {
-        background-color: var(--card-background);
-        margin: auto;
-        padding: 2rem;
-        border-radius: 8px;
-        width: 90%;
-        max-width: 900px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        position: relative;
-    }
-
-    .close-button {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        cursor: pointer;
-    }
-
-    .close-button:hover,
-    .close-button:focus {
-        color: var(--text-color);
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .modal-content h3 {
-        margin-top: 0;
-        color: var(--primary-color);
-    }
-
-    .modal-content textarea {
-        width: calc(100% - 20px);
-        min-height: 300px;
-        margin-bottom: 1rem;
-    }
-
-    .modal-content .button-group {
-        justify-content: flex-end;
-        gap: 10px;
-    }
-
-    .modal-content .button-group button {
-        margin-top: 0;
-    }
-
-    .modal-content .button-group button:first-child {
-        background-color: var(--secondary-color);
-        color: var(--text-color);
-    }
-
-    .modal-content .button-group button:first-child:hover {
-        background-color: #c0a080;
-    }
-
-    .admin-dashboard .stats {
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .admin-dashboard .stat-card {
-        background-color: var(--secondary-color);
-        padding: 1.5rem;
-        border-radius: 8px;
-        text-align: center;
-        flex: 1;
-        min-width: 180px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .admin-dashboard .stat-card h4 {
-        margin: 0 0 0.5rem 0;
-        color: var(--primary-color);
-        font-size: 1.1rem;
-    }
-
-    .admin-dashboard .stat-card p {
-        margin: 0;
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--accent-color);
-    }
-
-    .admin-dashboard .url-config {
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        background-color: #f9f9f9;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-    }
-
-    .admin-dashboard .url-config h3 {
-        margin-top: 0;
-    }
-
-    .admin-dashboard .url-config input {
-        width: calc(100% - 20px);
-    }
-
-    .admin-dashboard .url-config button {
-        margin-top: 1rem;
-    }
-
-    .admin-dashboard .logout-button {
-        background-color: var(--error-color);
-        margin-top: 1rem;
-    }
-
-    .admin-dashboard .logout-button:hover {
-        background-color: #c82333;
-    }
-
-    .admin-login .error-message {
-        color: var(--error-color);
-        font-weight: 600;
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    .admin-login .login-form {
-        text-align: center;
-    }
-
-    .admin-login .login-form input {
-        width: 250px;
-        margin-bottom: 1rem;
-    }
-
-    .admin-login .login-form button {
-        width: 250px;
-    }
-
-    .admin-login .url-config-pre-login { /* Novo estilo para o campo URL antes do login */
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        background-color: #f9f9f9;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        text-align: left; /* Alinha o texto à esquerda */
-    }
-
-    .admin-login .url-config-pre-login h3 {
-        margin-top: 0;
-        text-align: center; /* Centraliza o título */
-    }
-
-    .admin-login .url-config-pre-login input {
-        width: calc(100% - 20px);
-    }
-
-    .admin-login .url-config-pre-login button {
-        margin-top: 1rem;
-        width: auto; /* Permite que o botão se ajuste ao conteúdo */
-        display: block; /* Ocupa a largura total para centralizar */
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-&lt;/style&gt;
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            flex-grow: 1;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--light-text-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="password"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group, .interest-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group label, .interest-group label {
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 400;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .checkbox-group input[type="checkbox"], .interest-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked + label, .interest-group input[type="checkbox"]:checked + label {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .button-group button {
+            margin-top: 0;
+        }
+
+        .button-group button:first-child {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .button-group button:first-child:hover {
+            background-color: #c0a080;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--light-text-color);
+        }
+
+        .message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: var(--success-color);
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: var(--error-color);
+            border: 1px solid #f5c6cb;
+        }
+
+        .admin-panel, .client-view {
+            display: none;
+        }
+
+        .admin-panel.active, .client-view.active {
+            display: block;
+        }
+
+        .admin-login, .admin-dashboard {
+            display: none;
+        }
+
+        .admin-login.active, .admin-dashboard.active {
+            display: block;
+        }
+
+        .client-code-input {
+            text-align: center;
+        }
+
+        .client-code-input input {
+            width: 200px;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .client-code-input button {
+            display: block;
+            margin: 1rem auto;
+        }
+
+        .client-roteiro-display {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .client-roteiro-display h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .client-roteiro-display .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .client-roteiro-display .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-weight: 600;
+            color: var(--light-text-color);
+            transition: color 0.3s ease;
+        }
+
+        .client-roteiro-display .tab-button.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .client-roteiro-display .tab-content {
+            display: none;
+        }
+
+        .client-roteiro-display .tab-content.active {
+            display: block;
+        }
+
+        .client-roteiro-display pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .client-roteiro-display img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .client-roteiro-display .hero-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .client-roteiro-display .status-bar {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .client-roteiro-display .status-bar span {
+            display: block;
+        }
+
+        .client-roteiro-display .day-card {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .client-roteiro-display .day-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .client-roteiro-display .day-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .client-roteiro-display .day-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .client-roteiro-display .day-card ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .client-roteiro-display .day-card ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .client-roteiro-display .day-card ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .client-roteiro-display .day-card .tip {
+            font-style: italic;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+        }
+
+        .client-roteiro-display .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .client-roteiro-display .vouchers-list ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .client-roteiro-display .vouchers-list ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .client-roteiro-display .vouchers-list ul li a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .admin-dashboard .client-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .admin-dashboard .client-list th, .admin-dashboard .client-list td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .admin-dashboard .client-list th {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .admin-dashboard .client-list tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .admin-dashboard .client-list button {
+            background-color: var(--accent-color);
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            margin-top: 0;
+        }
+
+        .admin-dashboard .client-list button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .modal-content textarea {
+            width: calc(100% - 20px);
+            min-height: 300px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .button-group {
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-content .button-group button {
+            margin-top: 0;
+        }
+
+        .modal-content .button-group button:first-child {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .modal-content .button-group button:first-child:hover {
+            background-color: #c0a080;
+        }
+
+        .admin-dashboard .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-dashboard .stat-card {
+            background-color: var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .admin-dashboard .stat-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .admin-dashboard .stat-card p {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .admin-dashboard .url-config {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .admin-dashboard .url-config h3 {
+            margin-top: 0;
+        }
+
+        .admin-dashboard .url-config input {
+            width: calc(100% - 20px);
+        }
+
+        .admin-dashboard .url-config button {
+            margin-top: 1rem;
+        }
+
+        .admin-dashboard .logout-button {
+            background-color: var(--error-color);
+            margin-top: 1rem;
+        }
+
+        .admin-dashboard .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        .admin-login .error-message {
+            color: var(--error-color);
+            font-weight: 600;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .admin-login .login-form {
+            text-align: center;
+        }
+
+        .admin-login .login-form input {
+            width: 250px;
+            margin-bottom: 1rem;
+        }
+
+        .admin-login .login-form button {
+            width: 250px;
+        }
+
+        .admin-login .url-config-pre-login { /* Novo estilo para o campo URL antes do login */
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: left; /* Alinha o texto à esquerda */
+        }
+
+        .admin-login .url-config-pre-login h3 {
+            margin-top: 0;
+            text-align: center; /* Centraliza o título */
+        }
+
+        .admin-login .url-config-pre-login input {
+            width: calc(100% - 20px);
+        }
+
+        .admin-login .url-config-pre-login button {
+            margin-top: 1rem;
+            width: auto; /* Permite que o botão se ajuste ao conteúdo */
+            display: block; /* Ocupa a largura total para centralizar */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
 </head>
 <body>
     <header>
         <h1>BELGITOUR</h1>
         <p>Experiências que ficam</p>
     </header>
-&lt;main class="container"&gt;
-    &lt;!-- Formulário do Cliente --&gt;
-    &lt;section id="form-cliente" class="form-section"&gt;
-        &lt;div class="progress-indicator"&gt;&lt;/div&gt;
 
-        &lt;div id="step1" class="form-step active"&gt;
-            &lt;h2&gt;✨ Roteiro Personalizado com IA&lt;/h2&gt;
-            &lt;p&gt;Sua viagem dos &lt;strong&gt;sonhos&lt;/strong&gt;, planejada por especialistas&lt;/p&gt;
-            &lt;p&gt;Responda às perguntas abaixo e nossa equipe criará um roteiro exclusivo, revisado e personalizado para você.&lt;/p&gt;
-            &lt;div class="progress-indicator"&gt;1 DE 7&lt;/div&gt;
-            &lt;h3&gt;Seus dados&lt;/h3&gt;
-            &lt;p&gt;Para entrarmos em contato com seu roteiro&lt;/p&gt;
-            &lt;label for="nome"&gt;Nome completo *&lt;/label&gt;
-            &lt;input type="text" id="nome" required&gt;
-            &lt;label for="email"&gt;E-mail *&lt;/label&gt;
-            &lt;input type="email" id="email" required&gt;
-            &lt;label for="whatsapp"&gt;WhatsApp *&lt;/label&gt;
-            &lt;input type="tel" id="whatsapp" placeholder="(DDD) 9XXXX-XXXX" required&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+    <main class="container">
+        <!-- Formulário do Cliente -->
+        <section id="form-cliente" class="form-section">
+            <div class="progress-indicator"></div>
 
-        &lt;div id="step2" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;2 DE 7&lt;/div&gt;
-            &lt;h3&gt;A viagem&lt;/h3&gt;
-            &lt;p&gt;Destino, datas e quem vai&lt;/p&gt;
-            &lt;label for="destino"&gt;Destino principal *&lt;/label&gt;
-            &lt;input type="text" id="destino" required&gt;
-            &lt;label for="dataIda"&gt;Data de ida *&lt;/label&gt;
-            &lt;input type="date" id="dataIda" required&gt;
-            &lt;label for="dataVolta"&gt;Data de volta *&lt;/label&gt;
-            &lt;input type="date" id="dataVolta" required&gt;
-            &lt;label for="viajantes"&gt;Nº de viajantes *&lt;/label&gt;
-            &lt;select id="viajantes" required&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="1 pessoa"&gt;1 pessoa&lt;/option&gt;
-                &lt;option value="2 pessoas"&gt;2 pessoas&lt;/option&gt;
-                &lt;option value="3 pessoas"&gt;3 pessoas&lt;/option&gt;
-                &lt;option value="4 pessoas"&gt;4 pessoas&lt;/option&gt;
-                &lt;option value="5 ou mais"&gt;5 ou mais&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;label for="quemVai"&gt;Quem vai?&lt;/label&gt;
-            &lt;select id="quemVai"&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="Casal — lua de mel 💍"&gt;Casal — lua de mel 💍&lt;/option&gt;
-                &lt;option value="Casal — 1ª viagem"&gt;Casal — 1ª viagem&lt;/option&gt;
-                &lt;option value="Casal experiente"&gt;Casal experiente&lt;/option&gt;
-                &lt;option value="Família c/ crianças"&gt;Família c/ crianças&lt;/option&gt;
-                &lt;option value="Família c/ adolescentes"&gt;Família c/ adolescentes&lt;/option&gt;
-                &lt;option value="Grupo de amigos"&gt;Grupo de amigos&lt;/option&gt;
-                &lt;option value="Solo"&gt;Solo&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div id="step1" class="form-step active">
+                <h2>✨ Roteiro Personalizado com IA</h2>
+                <p>Sua viagem dos <strong>sonhos</strong>, planejada por especialistas</p>
+                <p>Responda às perguntas abaixo e nossa equipe criará um roteiro exclusivo, revisado e personalizado para você.</p>
+                <div class="progress-indicator">1 DE 7</div>
+                <h3>Seus dados</h3>
+                <p>Para entrarmos em contato com seu roteiro</p>
+                <label for="nome">Nome completo *</label>
+                <input type="text" id="nome" required>
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" required>
+                <label for="whatsapp">WhatsApp *</label>
+                <input type="tel" id="whatsapp" placeholder="(DDD) 9XXXX-XXXX" required>
+                <div class="button-group">
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="step3" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;3 DE 7&lt;/div&gt;
-            &lt;h3&gt;Estilo &amp; orçamento&lt;/h3&gt;
-            &lt;p&gt;Como você gosta de viajar&lt;/p&gt;
-            &lt;label for="estilo"&gt;Estilo da viagem&lt;/label&gt;
-            &lt;select id="estilo"&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="Romântico &amp; Cultural"&gt;Romântico &amp; Cultural&lt;/option&gt;
-                &lt;option value="Aventura &amp; Natureza"&gt;Aventura &amp; Natureza&lt;/option&gt;
-                &lt;option value="Gastronomia &amp; Bem-estar"&gt;Gastronomia &amp; Bem-estar&lt;/option&gt;
-                &lt;option value="Luxo &amp; Exclusividade"&gt;Luxo &amp; Exclusividade&lt;/option&gt;
-                &lt;option value="Mochilão"&gt;Mochilão&lt;/option&gt;
-                &lt;option value="Família"&gt;Família&lt;/option&gt;
-                &lt;option value="Cultural &amp; Histórico"&gt;Cultural &amp; Histórico&lt;/option&gt;
-                &lt;option value="Praia &amp; Relax"&gt;Praia &amp; Relax&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;label for="orcamento"&gt;Orçamento&lt;/label&gt;
-            &lt;select id="orcamento"&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="Econômico"&gt;Econômico&lt;/option&gt;
-                &lt;option value="Médio"&gt;Médio&lt;/option&gt;
-                &lt;option value="Médio-alto"&gt;Médio-alto&lt;/option&gt;
-                &lt;option value="Alto"&gt;Alto&lt;/option&gt;
-                &lt;option value="Premium"&gt;Premium&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;label for="acomodacao"&gt;Acomodação preferida&lt;/label&gt;
-            &lt;select id="acomodacao"&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="Hotel boutique"&gt;Hotel boutique&lt;/option&gt;
-                &lt;option value="Hotel 4-5 estrelas"&gt;Hotel 4-5 estrelas&lt;/option&gt;
-                &lt;option value="Hotel 3 estrelas"&gt;Hotel 3 estrelas&lt;/option&gt;
-                &lt;option value="Hostel"&gt;Hostel&lt;/option&gt;
-                &lt;option value="Resort"&gt;Resort&lt;/option&gt;
-                &lt;option value="Pousada típica"&gt;Pousada típica&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;label for="ritmo"&gt;Ritmo da viagem&lt;/label&gt;
-            &lt;select id="ritmo"&gt;
-                &lt;option value=""&gt;Selecione&lt;/option&gt;
-                &lt;option value="Tranquilo"&gt;Tranquilo&lt;/option&gt;
-                &lt;option value="Moderado"&gt;Moderado&lt;/option&gt;
-                &lt;option value="Intenso"&gt;Intenso&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div id="step2" class="form-step">
+                <div class="progress-indicator">2 DE 7</div>
+                <h3>A viagem</h3>
+                <p>Destino, datas e quem vai</p>
+                <label for="destino">Destino principal *</label>
+                <input type="text" id="destino" required>
+                <label for="dataIda">Data de ida *</label>
+                <input type="date" id="dataIda" required>
+                <label for="dataVolta">Data de volta *</label>
+                <input type="date" id="dataVolta" required>
+                <label for="viajantes">Nº de viajantes *</label>
+                <select id="viajantes" required>
+                    <option value="">Selecione</option>
+                    <option value="1 pessoa">1 pessoa</option>
+                    <option value="2 pessoas">2 pessoas</option>
+                    <option value="3 pessoas">3 pessoas</option>
+                    <option value="4 pessoas">4 pessoas</option>
+                    <option value="5 ou mais">5 ou mais</option>
+                </select>
+                <label for="quemVai">Quem vai?</label>
+                <select id="quemVai">
+                    <option value="">Selecione</option>
+                    <option value="Casal — lua de mel 💍">Casal — lua de mel 💍</option>
+                    <option value="Casal — 1ª viagem">Casal — 1ª viagem</option>
+                    <option value="Casal experiente">Casal experiente</option>
+                    <option value="Família c/ crianças">Família c/ crianças</option>
+                    <option value="Família c/ adolescentes">Família c/ adolescentes</option>
+                    <option value="Grupo de amigos">Grupo de amigos</option>
+                    <option value="Solo">Solo</option>
+                </select>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="step4" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;4 DE 7&lt;/div&gt;
-            &lt;h3&gt;Locomoção&lt;/h3&gt;
-            &lt;p&gt;Como você prefere se locomover durante a viagem? (Selecione uma ou mais opções)&lt;/p&gt;
-            &lt;div class="checkbox-group"&gt;
-                &lt;input type="checkbox" id="locomocao1" value="Locação de automóvel"&gt;&lt;label for="locomocao1"&gt;Locação de automóvel&lt;/label&gt;
-                &lt;input type="checkbox" id="locomocao2" value="Transporte público"&gt;&lt;label for="locomocao2"&gt;Transporte público&lt;/label&gt;
-                &lt;input type="checkbox" id="locomocao3" value="Táxi/Uber"&gt;&lt;label for="locomocao3"&gt;Táxi/Uber&lt;/label&gt;
-                &lt;input type="checkbox" id="locomocao4" value="A pé"&gt;&lt;label for="locomocao4"&gt;A pé&lt;/label&gt;
-                &lt;input type="checkbox" id="locomocao5" value="Bicicleta"&gt;&lt;label for="locomocao5"&gt;Bicicleta&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div id="step3" class="form-step">
+                <div class="progress-indicator">3 DE 7</div>
+                <h3>Estilo & orçamento</h3>
+                <p>Como você gosta de viajar</p>
+                <label for="estilo">Estilo da viagem</label>
+                <select id="estilo">
+                    <option value="">Selecione</option>
+                    <option value="Romântico & Cultural">Romântico & Cultural</option>
+                    <option value="Aventura & Natureza">Aventura & Natureza</option>
+                    <option value="Gastronomia & Bem-estar">Gastronomia & Bem-estar</option>
+                    <option value="Luxo & Exclusividade">Luxo & Exclusividade</option>
+                    <option value="Mochilão">Mochilão</option>
+                    <option value="Família">Família</option>
+                    <option value="Cultural & Histórico">Cultural & Histórico</option>
+                    <option value="Praia & Relax">Praia & Relax</option>
+                </select>
+                <label for="orcamento">Orçamento</label>
+                <select id="orcamento">
+                    <option value="">Selecione</option>
+                    <option value="Econômico">Econômico</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Médio-alto">Médio-alto</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Premium">Premium</option>
+                </select>
+                <label for="acomodacao">Acomodação preferida</label>
+                <select id="acomodacao">
+                    <option value="">Selecione</option>
+                    <option value="Hotel boutique">Hotel boutique</option>
+                    <option value="Hotel 4-5 estrelas">Hotel 4-5 estrelas</option>
+                    <option value="Hotel 3 estrelas">Hotel 3 estrelas</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Resort">Resort</option>
+                    <option value="Pousada típica">Pousada típica</option>
+                </select>
+                <label for="ritmo">Ritmo da viagem</label>
+                <select id="ritmo">
+                    <option value="">Selecione</option>
+                    <option value="Tranquilo">Tranquilo</option>
+                    <option value="Moderado">Moderado</option>
+                    <option value="Intenso">Intenso</option>
+                </select>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="step5" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;5 DE 7&lt;/div&gt;
-            &lt;h3&gt;O que você ama&lt;/h3&gt;
-            &lt;p&gt;Clique em tudo que te interessa&lt;/p&gt;
-            &lt;div class="interest-group"&gt;
-                &lt;input type="checkbox" id="interesse1" value="Templos"&gt; &lt;label for="interesse1"&gt;🛕 Templos&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse2" value="Culinária de rua"&gt; &lt;label for="interesse2"&gt;🍜 Culinária de rua&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse3" value="Alta gastronomia"&gt; &lt;label for="interesse3"&gt;⭐ Alta gastronomia&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse4" value="Museus &amp; Arte"&gt; &lt;label for="interesse4"&gt;🎨 Museus &amp; Arte&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse5" value="Noite"&gt; &lt;label for="interesse5"&gt;🍸 Noite&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse6" value="Natureza"&gt; &lt;label for="interesse6"&gt;🌿 Natureza&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse7" value="Compras"&gt; &lt;label for="interesse7"&gt;🛍️ Compras&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse8" value="Tecnologia"&gt; &lt;label for="interesse8"&gt;💡 Tecnologia&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse9" value="Alternativo"&gt; &lt;label for="interesse9"&gt;🎸 Alternativo&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse10" value="Aventura"&gt; &lt;label for="interesse10"&gt;🏄 Aventura&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse11" value="Arquitetura"&gt; &lt;label for="interesse11"&gt;🏛️ Arquitetura&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse12" value="Bem-estar"&gt; &lt;label for="interesse12"&gt;🧘 Bem-estar&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse13" value="Fotografia"&gt; &lt;label for="interesse13"&gt;📸 Fotografia&lt;/option&gt;
-                &lt;input type="checkbox" id="interesse14" value="História"&gt; &lt;label for="interesse14"&gt;📜 História&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse15" value="Música"&gt; &lt;label for="interesse15"&gt;🎵 Música&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse16" value="Bebidas"&gt; &lt;label for="interesse16"&gt;🍷 Bebidas&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse17" value="Vida local"&gt; &lt;label for="interesse17"&gt;🏘️ Vida local&lt;/label&gt;
-                &lt;input type="checkbox" id="interesse18" value="Praias"&gt; &lt;label for="interesse18"&gt;🏖️ Praias&lt;/label&gt;
-            &lt;/div&gt;
-            &lt;label for="outrosInteresses"&gt;Outros interesses&lt;/label&gt;
-            &lt;textarea id="outrosInteresses"&gt;&lt;/textarea&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div id="step4" class="form-step">
+                <div class="progress-indicator">4 DE 7</div>
+                <h3>Locomoção</h3>
+                <p>Como você prefere se locomover durante a viagem? (Selecione uma ou mais opções)</p>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="locomocao1" value="Locação de automóvel"><label for="locomocao1">Locação de automóvel</label>
+                    <input type="checkbox" id="locomocao2" value="Transporte público"><label for="locomocao2">Transporte público</label>
+                    <input type="checkbox" id="locomocao3" value="Táxi/Uber"><label for="locomocao3">Táxi/Uber</label>
+                    <input type="checkbox" id="locomocao4" value="A pé"><label for="locomocao4">A pé</label>
+                    <input type="checkbox" id="locomocao5" value="Bicicleta"><label for="locomocao5">Bicicleta</label>
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="step6" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;6 DE 7&lt;/div&gt;
-            &lt;h3&gt;Seus sonhos de viagem&lt;/h3&gt;
-            &lt;p&gt;O que tornaria essa viagem inesquecível?&lt;/p&gt;
-            &lt;label for="sonhos"&gt;Experiências que você sempre quis ter *&lt;/label&gt;
-            &lt;textarea id="sonhos" required&gt;&lt;/textarea&gt;
-            &lt;label for="naoquero"&gt;Tem algo que definitivamente não quer fazer?&lt;/label&gt;
-            &lt;textarea id="naoquero"&gt;&lt;/textarea&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="nextStep()"&gt;Próximo →&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <div id="step5" class="form-step">
+                <div class="progress-indicator">5 DE 7</div>
+                <h3>O que você ama</h3>
+                <p>Clique em tudo que te interessa</p>
+                <div class="interest-group">
+                    <input type="checkbox" id="interesse1" value="Templos"> <label for="interesse1">🛕 Templos</label>
+                    <input type="checkbox" id="interesse2" value="Culinária de rua"> <label for="interesse2">🍜 Culinária de rua</label>
+                    <input type="checkbox" id="interesse3" value="Alta gastronomia"> <label for="interesse3">⭐ Alta gastronomia</label>
+                    <input type="checkbox" id="interesse4" value="Museus & Arte"> <label for="interesse4">🎨 Museus & Arte</label>
+                    <input type="checkbox" id="interesse5" value="Noite"> <label for="interesse5">🍸 Noite</label>
+                    <input type="checkbox" id="interesse6" value="Natureza"> <label for="interesse6">🌿 Natureza</label>
+                    <input type="checkbox" id="interesse7" value="Compras"> <label for="interesse7">🛍️ Compras</label>
+                    <input type="checkbox" id="interesse8" value="Tecnologia"> <label for="interesse8">💡 Tecnologia</label>
+                    <input type="checkbox" id="interesse9" value="Alternativo"> <label for="interesse9">🎸 Alternativo</label>
+                    <input type="checkbox" id="interesse10" value="Aventura"> <label for="interesse10">🏄 Aventura</label>
+                    <input type="checkbox" id="interesse11" value="Arquitetura"> <label for="interesse11">🏛️ Arquitetura</label>
+                    <input type="checkbox" id="interesse12" value="Bem-estar"> <label for="interesse12">🧘 Bem-estar</label>
+                    <input type="checkbox" id="interesse13" value="Fotografia"> <label for="interesse13">📸 Fotografia</option>
+                    <input type="checkbox" id="interesse14" value="História"> <label for="interesse14">📜 História</label>
+                    <input type="checkbox" id="interesse15" value="Música"> <label for="interesse15">🎵 Música</label>
+                    <input type="checkbox" id="interesse16" value="Bebidas"> <label for="interesse16">🍷 Bebidas</label>
+                    <input type="checkbox" id="interesse17" value="Vida local"> <label for="interesse17">🏘️ Vida local</label>
+                    <input type="checkbox" id="interesse18" value="Praias"> <label for="interesse18">🏖️ Praias</label>
+                </div>
+                <label for="outrosInteresses">Outros interesses</label>
+                <textarea id="outrosInteresses"></textarea>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="step7" class="form-step"&gt;
-            &lt;div class="progress-indicator"&gt;7 DE 7&lt;/div&gt;
-            &lt;h3&gt;Necessidades especiais&lt;/h3&gt;
-            &lt;p&gt;Para um roteiro seguro e confortável&lt;/p&gt;
-            &lt;label for="alimentar"&gt;Restrição alimentar&lt;/label&gt;
-            &lt;select id="alimentar"&gt;
-                &lt;option value="Nenhuma"&gt;Nenhuma&lt;/option&gt;
-                &lt;option value="Sem carne de porco"&gt;Sem carne de porco&lt;/option&gt;
-                &lt;option value="Vegetariano"&gt;Vegetariano&lt;/option&gt;
-                &lt;option value="Vegano"&gt;Vegano&lt;/option&gt;
-                &lt;option value="Sem glúten"&gt;Sem glúten&lt;/option&gt;
-                &lt;option value="Halal"&gt;Halal&lt;/option&gt;
-                &lt;option value="Kosher"&gt;Kosher&lt;/option&gt;
-                &lt;option value="Alergia a frutos do mar"&gt;Alergia a frutos do mar&lt;/option&gt;
-                &lt;option value="Alergia a amendoim"&gt;Alergia a amendoim&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;label for="mobilidade"&gt;Mobilidade / acessibilidade&lt;/label&gt;
-            &lt;select id="mobilidade"&gt;
-                &lt;option value="Sem restrições"&gt;Sem restrições&lt;/option&gt;
-                &lt;option value="Evita multidões"&gt;Evita multidões&lt;/option&gt;
-                &lt;option value="Mobilidade reduzida"&gt;Mobilidade reduzida&lt;/option&gt;
-                &lt;option value="Com bebê/carrinho"&gt;Com bebê/carrinho&lt;/option&gt;
-                &lt;option value="Medo de alturas"&gt;Medo de alturas&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;div id="form-error" class="message error" style="display:none;"&gt;⚠️ Erro ao enviar. Tente novamente.&lt;/div&gt;
-            &lt;div class="button-group"&gt;
-                &lt;button type="button" onclick="prevStep()"&gt;← Voltar&lt;/button&gt;
-                &lt;button type="button" onclick="submitForm()"&gt;✈️ Enviar para a Belgitour&lt;/button&gt;
-            &lt;/div&gt;
-            &lt;p style="text-align: center; font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;"&gt;
-                Após o envio, nossa equipe irá preparar e revisar seu roteiro. Você receberá o código por WhatsApp.
-            &lt;/p&gt;
-        &lt;/div&gt;
+            <div id="step6" class="form-step">
+                <div class="progress-indicator">6 DE 7</div>
+                <h3>Seus sonhos de viagem</h3>
+                <p>O que tornaria essa viagem inesquecível?</p>
+                <label for="sonhos">Experiências que você sempre quis ter *</label>
+                <textarea id="sonhos" required></textarea>
+                <label for="naoquero">Tem algo que definitivamente não quer fazer?</label>
+                <textarea id="naoquero"></textarea>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="nextStep()">Próximo →</button>
+                </div>
+            </div>
 
-        &lt;div id="success-message" class="form-step" style="text-align: center;"&gt;
-            &lt;p style="font-size: 3rem; margin-bottom: 0;"&gt;🎉&lt;/p&gt;
-            &lt;h2&gt;Recebemos tudo!&lt;/h2&gt;
-            &lt;p&gt;Suas informações foram enviadas para a equipe da Belgitour. Nossos especialistas irão preparar um roteiro exclusivo para você.&lt;/p&gt;
-            &lt;p&gt;📲 Você receberá seu código de acesso por WhatsApp assim que o roteiro estiver pronto.&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
+            <div id="step7" class="form-step">
+                <div class="progress-indicator">7 DE 7</div>
+                <h3>Necessidades especiais</h3>
+                <p>Para um roteiro seguro e confortável</p>
+                <label for="alimentar">Restrição alimentar</label>
+                <select id="alimentar">
+                    <option value="Nenhuma">Nenhuma</option>
+                    <option value="Sem carne de porco">Sem carne de porco</option>
+                    <option value="Vegetariano">Vegetariano</option>
+                    <option value="Vegano">Vegano</option>
+                    <option value="Sem glúten">Sem glúten</option>
+                    <option value="Halal">Halal</option>
+                    <option value="Kosher">Kosher</option>
+                    <option value="Alergia a frutos do mar">Alergia a frutos do mar</option>
+                    <option value="Alergia a amendoim">Alergia a amendoim</option>
+                </select>
+                <label for="mobilidade">Mobilidade / acessibilidade</label>
+                <select id="mobilidade">
+                    <option value="Sem restrições">Sem restrições</option>
+                    <option value="Evita multidões">Evita multidões</option>
+                    <option value="Mobilidade reduzida">Mobilidade reduzida</option>
+                    <option value="Com bebê/carrinho">Com bebê/carrinho</option>
+                    <option value="Medo de alturas">Medo de alturas</option>
+                </select>
+                <div id="form-error" class="message error" style="display:none;">⚠️ Erro ao enviar. Tente novamente.</div>
+                <div class="button-group">
+                    <button type="button" onclick="prevStep()">← Voltar</button>
+                    <button type="button" onclick="submitForm()">✈️ Enviar para a Belgitour</button>
+                </div>
+                <p style="text-align: center; font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;">
+                    Após o envio, nossa equipe irá preparar e revisar seu roteiro. Você receberá o código por WhatsApp.
+                </p>
+            </div>
 
-    &lt;!-- Painel Administrativo --&gt;
-    &lt;section id="painel" class="admin-panel"&gt;
-        &lt;div class="admin-login active"&gt;
-            &lt;h2&gt;BELGITOUR&lt;/h2&gt;
-            &lt;h3&gt;Painel Administrativo&lt;/h3&gt;
+            <div id="success-message" class="form-step" style="text-align: center;">
+                <p style="font-size: 3rem; margin-bottom: 0;">🎉</p>
+                <h2>Recebemos tudo!</h2>
+                <p>Suas informações foram enviadas para a equipe da Belgitour. Nossos especialistas irão preparar um roteiro exclusivo para você.</p>
+                <p>📲 Você receberá seu código de acesso por WhatsApp assim que o roteiro estiver pronto.</p>
+            </div>
+        </section>
 
-            &lt;div class="url-config-pre-login"&gt;
-                &lt;h3&gt;⚙️ URL Apps Script&lt;/h3&gt;
-                &lt;input type="text" id="appsScriptUrlPreLogin" placeholder="Cole a URL do Apps Script aqui"&gt;
-                &lt;button type="button" onclick="saveAppsScriptUrlPreLogin()"&gt;Salvar&lt;/button&gt;
-            &lt;/div&gt;
+        <!-- Painel Administrativo -->
+        <section id="painel" class="admin-panel">
+            <div class="admin-login active">
+                <h2>BELGITOUR</h2>
+                <h3>Painel Administrativo</h3>
 
-            &lt;div class="login-form"&gt;
-                &lt;label for="adminPassword"&gt;Senha&lt;/label&gt;
-                &lt;input type="password" id="adminPassword"&gt;
-                &lt;div id="login-error" class="message error" style="display:none;"&gt;Senha incorreta&lt;/div&gt;
-                &lt;button type="button" onclick="loginAdmin()"&gt;Entrar&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+                <div class="url-config-pre-login">
+                    <h3>⚙️ URL Apps Script</h3>
+                    <input type="text" id="appsScriptUrlPreLogin" placeholder="Cole a URL do Apps Script aqui">
+                    <button type="button" onclick="saveAppsScriptUrlPreLogin()">Salvar</button>
+                </div>
 
-        &lt;div class="admin-dashboard"&gt;
-            &lt;p&gt;Painel ativo &lt;button class="logout-button" onclick="logoutAdmin()"&gt;Sair&lt;/button&gt;&lt;/p&gt;
-            &lt;h2&gt;Painel de Roteiros&lt;/h2&gt;
-            &lt;p&gt;Gerencie os clientes, gere e aprove roteiros personalizados&lt;/p&gt;
+                <div class="login-form">
+                    <label for="adminPassword">Senha</label>
+                    <input type="password" id="adminPassword">
+                    <div id="login-error" class="message error" style="display:none;">Senha incorreta</div>
+                    <button type="button" onclick="loginAdmin()">Entrar</button>
+                </div>
+            </div>
 
-            &lt;div class="url-config"&gt;
-                &lt;h3&gt;⚙️ URL Apps Script&lt;/h3&gt;
-                &lt;input type="text" id="appsScriptUrl" placeholder="Cole a URL do Apps Script aqui"&gt;
-                &lt;button type="button" onclick="saveAppsScriptUrl()"&gt;Salvar&lt;/button&gt;
-            &lt;/div&gt;
+            <div class="admin-dashboard">
+                <p>Painel ativo <button class="logout-button" onclick="logoutAdmin()">Sair</button></p>
+                <h2>Painel de Roteiros</h2>
+                <p>Gerencie os clientes, gere e aprove roteiros personalizados</p>
 
-            &lt;div class="stats"&gt;
-                &lt;div class="stat-card"&gt;
-                    &lt;h4&gt;Total de clientes&lt;/h4&gt;
-                    &lt;p id="totalClientes"&gt;-&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="stat-card"&gt;
-                    &lt;h4&gt;Aguardando roteiro&lt;/h4&gt;
-                    &lt;p id="pendentes"&gt;-&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="stat-card"&gt;
-                    &lt;h4&gt;Gerados (revisão)&lt;/h4&gt;
-                    &lt;p id="gerados"&gt;-&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="stat-card"&gt;
-                    &lt;h4&gt;Aprovados&lt;/h4&gt;
-                    &lt;p id="aprovados"&gt;-&lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+                <div class="url-config">
+                    <h3>⚙️ URL Apps Script</h3>
+                    <input type="text" id="appsScriptUrl" placeholder="Cole a URL do Apps Script aqui">
+                    <button type="button" onclick="saveAppsScriptUrl()">Salvar</button>
+                </div>
 
-            &lt;h3&gt;📋 Clientes &lt;button type="button" onclick="loadClients()"&gt;↻ Atualizar&lt;/button&gt;&lt;/h3&gt;
-            &lt;div id="client-list" class="client-list"&gt;
-                &lt;p&gt;Carregando clientes...&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+                <div class="stats">
+                    <div class="stat-card">
+                        <h4>Total de clientes</h4>
+                        <p id="totalClientes">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Aguardando roteiro</h4>
+                        <p id="pendentes">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Gerados (revisão)</h4>
+                        <p id="gerados">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Aprovados</h4>
+                        <p id="aprovados">-</p>
+                    </div>
+                </div>
 
-        &lt;!-- Modal de Edição de Roteiro --&gt;
-        &lt;div id="roteiroModal" class="modal"&gt;
-            &lt;div class="modal-content"&gt;
-                &lt;span class="close-button" onclick="closeModal()"&gt;×&lt;/span&gt;
-                &lt;h3&gt;Roteiro&lt;/h3&gt;
-                &lt;p&gt;Cliente: &lt;strong id="modalClientName"&gt;&lt;/strong&gt;&lt;/p&gt;
-                &lt;button type="button" onclick="generateRoteiro()"&gt;✨ Gerar Roteiro com IA (pode levar 30–90 seg para viagens longas)&lt;/button&gt;
-                &lt;label for="roteiroTextarea"&gt;📝 Roteiro (edite livremente antes de aprovar):&lt;/label&gt;
-                &lt;textarea id="roteiroTextarea"&gt;&lt;/textarea&gt;
-                &lt;label for="vouchersTextarea"&gt;📄 Documentos, Vouchers &amp; Links de Reserva:&lt;/label&gt;
-                &lt;textarea id="vouchersTextarea" placeholder="Cole aqui os links de reserva de hotel, vouchers de passeios, bilhetes, etc. — um por linha.&amp;#10;Exemplos: link do Google Drive, Booking.com, GetYourGuide, bilhete de trem..."&gt;&lt;/textarea&gt;
-                &lt;div class="button-group"&gt;
-                    &lt;button type="button" onclick="saveRoteiro()"&gt;💾 Salvar alterações&lt;/button&gt;
-                    &lt;button type="button" onclick="approveRoteiro()"&gt;✅ Aprovar e gerar código&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
+                <h3>📋 Clientes <button type="button" onclick="loadClients()">↻ Atualizar</button></h3>
+                <div id="client-list" class="client-list">
+                    <p>Carregando clientes...</p>
+                </div>
+            </div>
 
-    &lt;!-- Tela do Cliente para Ver Roteiro --&gt;
-    &lt;section id="roteiro" class="client-view"&gt;
-        &lt;h2&gt;✈ Acessar meu roteiro&lt;/h2&gt;
-        &lt;p&gt;Digite o código que a Belgitour enviou por WhatsApp&lt;/p&gt;
-        &lt;div class="client-code-input"&gt;
-            &lt;input type="text" id="clientCodeInput" placeholder="XXXX-XXXX" maxlength="9"&gt;
-            &lt;div id="client-error" class="message error" style="display:none;"&gt;Erro ao buscar roteiro. Tente novamente.&lt;/div&gt;
-            &lt;button type="button" onclick="fetchClientRoteiro()"&gt;✈️ Ver meu roteiro&lt;/button&gt;
-            &lt;p style="font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;"&gt;
-                O código foi enviado pela equipe Belgitour após a revisão do seu roteiro.
-            &lt;/p&gt;
-        &lt;/div&gt;
+            <!-- Modal de Edição de Roteiro -->
+            <div id="roteiroModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal()">×</span>
+                    <h3>Roteiro</h3>
+                    <p>Cliente: <strong id="modalClientName"></strong></p>
+                    <button type="button" onclick="generateRoteiro()">✨ Gerar Roteiro com IA (pode levar 30–90 seg para viagens longas)</button>
+                    <label for="roteiroTextarea">📝 Roteiro (edite livremente antes de aprovar):</label>
+                    <textarea id="roteiroTextarea"></textarea>
+                    <label for="vouchersTextarea">📄 Documentos, Vouchers & Links de Reserva:</label>
+                    <textarea id="vouchersTextarea" placeholder="Cole aqui os links de reserva de hotel, vouchers de passeios, bilhetes, etc. — um por linha.&#10;Exemplos: link do Google Drive, Booking.com, GetYourGuide, bilhete de trem..."></textarea>
+                    <div class="button-group">
+                        <button type="button" onclick="saveRoteiro()">💾 Salvar alterações</button>
+                        <button type="button" onclick="approveRoteiro()">✅ Aprovar e gerar código</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        &lt;div id="clientRoteiroDisplay" class="client-roteiro-display" style="display:none;"&gt;
-            &lt;img id="heroImage" class="hero-image" alt="Imagem do destino"&gt;
-            &lt;div class="status-bar"&gt;
-                &lt;span id="displayDestino"&gt;&lt;/span&gt;
-                &lt;span id="displayPeriodo"&gt;&lt;/span&gt;
-                &lt;span id="displayStatus"&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;div class="tabs"&gt;
-                &lt;button class="tab-button active" onclick="openTab(event, 'roteiroContent')"&gt;📅 Roteiro&lt;/button&gt;
-                &lt;button class="tab-button" onclick="openTab(event, 'documentosContent')"&gt;📄 Documentos&lt;/button&gt;
-            &lt;/div&gt;
+        <!-- Tela do Cliente para Ver Roteiro -->
+        <section id="roteiro" class="client-view">
+            <h2>✈ Acessar meu roteiro</h2>
+            <p>Digite o código que a Belgitour enviou por WhatsApp</p>
+            <div class="client-code-input">
+                <input type="text" id="clientCodeInput" placeholder="XXXX-XXXX" maxlength="9">
+                <div id="client-error" class="message error" style="display:none;">Erro ao buscar roteiro. Tente novamente.</div>
+                <button type="button" onclick="fetchClientRoteiro()">✈️ Ver meu roteiro</button>
+                <p style="font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;">
+                    O código foi enviado pela equipe Belgitour após a revisão do seu roteiro.
+                </p>
+            </div>
 
-            &lt;div id="roteiroContent" class="tab-content active"&gt;
-                &lt;div id="roteiroHtmlContent"&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            <div id="clientRoteiroDisplay" class="client-roteiro-display" style="display:none;">
+                <img id="heroImage" class="hero-image" alt="Imagem do destino">
+                <div class="status-bar">
+                    <span id="displayDestino"></span>
+                    <span id="displayPeriodo"></span>
+                    <span id="displayStatus"></span>
+                </div>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="openTab(event, 'roteiroContent')">📅 Roteiro</button>
+                    <button class="tab-button" onclick="openTab(event, 'documentosContent')">📄 Documentos</button>
+                </div>
 
-            &lt;div id="documentosContent" class="tab-content"&gt;
-                &lt;div id="vouchersHtmlContent" class="vouchers-list"&gt;&lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
-&lt;/main&gt;
+                <div id="roteiroContent" class="tab-content active">
+                    <div id="roteiroHtmlContent"></div>
+                </div>
 
-&lt;footer&gt;
-    &lt;p&gt;&amp;copy; 2026 Belgitour. Todos os direitos reservados.&lt;/p&gt;
-&lt;/footer&gt;
+                <div id="documentosContent" class="tab-content">
+                    <div id="vouchersHtmlContent" class="vouchers-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-&lt;script&gt;
-    let currentStep = 1;
-    const totalSteps = 7;
-    let appsScriptUrl = localStorage.getItem('belgitourAppsScriptUrl') || '';
-    let adminLoggedIn = false;
-    let currentClientIdx = null;
+    <footer>
+        <p>&copy; 2026 Belgitour. Todos os direitos reservados.</p>
+    </footer>
 
-    document.addEventListener('DOMContentLoaded', () =&gt; {
-        updateHash();
-        window.addEventListener('hashchange', updateHash);
-        document.getElementById('appsScriptUrlPreLogin').value = appsScriptUrl; // Preenche o campo pré-login
-        document.getElementById('appsScriptUrl').value = appsScriptUrl; // Preenche o campo pós-login
+    <script>
+        let currentStep = 1;
+        const totalSteps = 7;
+        let appsScriptUrl = localStorage.getItem('belgitourAppsScriptUrl') || '';
+        let adminLoggedIn = false;
+        let currentClientIdx = null;
 
-        // Formata o input de WhatsApp
-        document.getElementById('whatsapp').addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-            if (value.length &gt; 0) {
-                value = '(' + value.substring(0, 2);
-                if (value.length &gt; 3) {
-                    value += ') ' + value.substring(2, 7);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHash();
+            window.addEventListener('hashchange', updateHash);
+            document.getElementById('appsScriptUrlPreLogin').value = appsScriptUrl; // Preenche o campo pré-login
+            document.getElementById('appsScriptUrl').value = appsScriptUrl; // Preenche o campo pós-login
+
+            // Formata o input de WhatsApp
+            document.getElementById('whatsapp').addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+                if (value.length > 0) {
+                    value = '(' + value.substring(0, 2);
+                    if (value.length > 3) {
+                        value += ') ' + value.substring(2, 7);
+                    }
+                    if (value.length > 10) {
+                        value += '-' + value.substring(7, 11);
+                    }
                 }
-                if (value.length &gt; 10) {
-                    value += '-' + value.substring(7, 11);
-                }
-            }
-            e.target.value = value;
-        });
-
-        // Formata o input de código do roteiro
-        document.getElementById('clientCodeInput').addEventListener('input', function (e) {
-            let value = e.target.value.replace(/[^A-Z0-9]/gi, '').toUpperCase(); // Remove caracteres especiais e converte para maiúscula
-            if (value.length &gt; 4) {
-                value = value.substring(0, 4) + '-' + value.substring(4, 8);
-            }
-            e.target.value = value;
-        });
-    });
-
-    function updateHash() {
-        const hash = window.location.hash;
-        document.querySelectorAll('.form-section, .admin-panel, .client-view').forEach(section =&gt; {
-            section.style.display = 'none';
-        });
-
-        if (hash === '#painel') {
-            document.getElementById('painel').style.display = 'block';
-            if (adminLoggedIn) {
-                document.querySelector('.admin-login').style.display = 'none';
-                document.querySelector('.admin-dashboard').style.display = 'block';
-                loadClients();
-            } else {
-                document.querySelector('.admin-login').style.display = 'block';
-                document.querySelector('.admin-dashboard').style.display = 'none';
-                document.getElementById('login-error').style.display = 'none';
-                // Exibe o campo de URL do Apps Script antes do login
-                document.querySelector('.admin-login .url-config-pre-login').style.display = 'block';
-            }
-        } else if (hash === '#roteiro') {
-            document.getElementById('roteiro').style.display = 'block';
-            document.getElementById('clientRoteiroDisplay').style.display = 'none';
-            document.getElementById('client-error').style.display = 'none';
-        } else {
-            document.getElementById('form-cliente').style.display = 'block';
-            showStep(currentStep);
-        }
-    }
-
-    function showStep(step) {
-        document.querySelectorAll('.form-step').forEach(s =&gt; s.classList.remove('active'));
-        document.getElementById(`step${step}`).classList.add('active');
-        document.querySelector('.progress-indicator').textContent = `${step} DE ${totalSteps}`;
-        currentStep = step;
-    }
-
-    function nextStep() {
-        if (validateStep(currentStep)) {
-            if (currentStep &lt; totalSteps) {
-                showStep(currentStep + 1);
-            }
-        }
-    }
-
-    function prevStep() {
-        if (currentStep &gt; 1) {
-            showStep(currentStep - 1);
-        }
-    }
-
-    function validateStep(step) {
-        let isValid = true;
-        const currentForm = document.getElementById(`step${step}`);
-        const requiredInputs = currentForm.querySelectorAll('[required]');
-
-        requiredInputs.forEach(input =&gt; {
-            if (!input.value.trim()) {
-                input.style.borderColor = 'var(--error-color)';
-                isValid = false;
-            } else {
-                input.style.borderColor = 'var(--border-color)';
-            }
-        });
-
-        if (step === 6) { // Validação específica para "Experiências sonhadas"
-            const sonhos = document.getElementById('sonhos');
-            if (!sonhos.value.trim()) {
-                sonhos.style.borderColor = 'var(--error-color)';
-                isValid = false;
-            } else {
-                sonhos.style.borderColor = 'var(--border-color)';
-            }
-        }
-
-        return isValid;
-    }
-
-    async function submitForm() {
-        if (!validateStep(currentStep)) {
-            document.getElementById('form-error').style.display = 'block';
-            return;
-        }
-        document.getElementById('form-error').style.display = 'none';
-
-        const locomocao = Array.from(document.querySelectorAll('#step4 input[type="checkbox"]:checked'))
-                            .map(cb =&gt; cb.value).join(', ');
-        const interesses = Array.from(document.querySelectorAll('#step5 input[type="checkbox"]:checked'))
-                            .map(cb =&gt; cb.value).join(', ');
-
-        const formData = {
-            action: 'enviarFormulario',
-            nome: document.getElementById('nome').value,
-            email: document.getElementById('email').value,
-            whatsapp: document.getElementById('whatsapp').value,
-            destino: document.getElementById('destino').value,
-            dataIda: document.getElementById('dataIda').value,
-            dataVolta: document.getElementById('dataVolta').value,
-            viajantes: document.getElementById('viajantes').value,
-            quemVai: document.getElementById('quemVai').value,
-            estilo: document.getElementById('estilo').value,
-            orcamento: document.getElementById('orcamento').value,
-            acomodacao: document.getElementById('acomodacao').value,
-            ritmo: document.getElementById('ritmo').value,
-            locomocao: locomocao,
-            interesses: interesses + (document.getElementById('outrosInteresses').value ? ', ' + document.getElementById('outrosInteresses').value : ''),
-            sonhos: document.getElementById('sonhos').value,
-            naoquero: document.getElementById('naoquero').value,
-            alimentar: document.getElementById('alimentar').value,
-            mobilidade: document.getElementById('mobilidade').value
-        };
-
-        try {
-            const response = await fetch(appsScriptUrl, {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                e.target.value = value;
             });
-            const data = await response.json();
-            if (data.sucesso) {
-                document.getElementById('step7').classList.remove('active');
-                document.getElementById('success-message').classList.add('active');
+
+            // Formata o input de código do roteiro
+            document.getElementById('clientCodeInput').addEventListener('input', function (e) {
+                let value = e.target.value.replace(/[^A-Z0-9]/gi, '').toUpperCase(); // Remove caracteres especiais e converte para maiúscula
+                if (value.length > 4) {
+                    value = value.substring(0, 4) + '-' + value.substring(4, 8);
+                }
+                e.target.value = value;
+            });
+        });
+
+        function updateHash() {
+            const hash = window.location.hash;
+            document.querySelectorAll('.form-section, .admin-panel, .client-view').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            if (hash === '#painel') {
+                document.getElementById('painel').style.display = 'block';
+                if (adminLoggedIn) {
+                    document.querySelector('.admin-login').style.display = 'none';
+                    document.querySelector('.admin-dashboard').style.display = 'block';
+                    loadClients();
+                } else {
+                    document.querySelector('.admin-login').style.display = 'block';
+                    document.querySelector('.admin-dashboard').style.display = 'none';
+                    document.getElementById('login-error').style.display = 'none';
+                    // Exibe o campo de URL do Apps Script antes do login
+                    document.querySelector('.admin-login .url-config-pre-login').style.display = 'block';
+                }
+            } else if (hash === '#roteiro') {
+                document.getElementById('roteiro').style.display = 'block';
+                document.getElementById('clientRoteiroDisplay').style.display = 'none';
+                document.getElementById('client-error').style.display = 'none';
             } else {
-                document.getElementById('form-error').textContent = `⚠️ Erro: ${data.erro || 'Não foi possível enviar o formulário.'}`;
+                document.getElementById('form-cliente').style.display = 'block';
+                showStep(currentStep);
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            document.querySelector('.progress-indicator').textContent = `${step} DE ${totalSteps}`;
+            currentStep = step;
+        }
+
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    showStep(currentStep + 1);
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            const currentForm = document.getElementById(`step${step}`);
+            const requiredInputs = currentForm.querySelectorAll('[required]');
+
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'var(--error-color)';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'var(--border-color)';
+                }
+            });
+
+            if (step === 6) { // Validação específica para "Experiências sonhadas"
+                const sonhos = document.getElementById('sonhos');
+                if (!sonhos.value.trim()) {
+                    sonhos.style.borderColor = 'var(--error-color)';
+                    isValid = false;
+                } else {
+                    sonhos.style.borderColor = 'var(--border-color)';
+                }
+            }
+
+            return isValid;
+        }
+
+        async function submitForm() {
+            if (!validateStep(currentStep)) {
+                document.getElementById('form-error').style.display = 'block';
+                return;
+            }
+            document.getElementById('form-error').style.display = 'none';
+
+            const locomocao = Array.from(document.querySelectorAll('#step4 input[type="checkbox"]:checked'))
+                                .map(cb => cb.value).join(', ');
+            const interesses = Array.from(document.querySelectorAll('#step5 input[type="checkbox"]:checked'))
+                                .map(cb => cb.value).join(', ');
+
+            const formData = {
+                action: 'enviarFormulario',
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                destino: document.getElementById('destino').value,
+                dataIda: document.getElementById('dataIda').value,
+                dataVolta: document.getElementById('dataVolta').value,
+                viajantes: document.getElementById('viajantes').value,
+                quemVai: document.getElementById('quemVai').value,
+                estilo: document.getElementById('estilo').value,
+                orcamento: document.getElementById('orcamento').value,
+                acomodacao: document.getElementById('acomodacao').value,
+                ritmo: document.getElementById('ritmo').value,
+                locomocao: locomocao,
+                interesses: interesses + (document.getElementById('outrosInteresses').value ? ', ' + document.getElementById('outrosInteresses').value : ''),
+                sonhos: document.getElementById('sonhos').value,
+                naoquero: document.getElementById('naoquero').value,
+                alimentar: document.getElementById('alimentar').value,
+                mobilidade: document.getElementById('mobilidade').value
+            };
+
+            try {
+                const response = await fetch(appsScriptUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                if (data.sucesso) {
+                    document.getElementById('step7').classList.remove('active');
+                    document.getElementById('success-message').classList.add('active');
+                } else {
+                    document.getElementById('form-error').textContent = `⚠️ Erro: ${data.erro || 'Não foi possível enviar o formulário.'}`;
+                    document.getElementById('form-error').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('form-error').textContent = `⚠️ Erro de conexão: ${error.message}. Verifique sua internet ou tente novamente.`;
                 document.getElementById('form-error').style.display = 'block';
             }
-        } catch (error) {
-            document.getElementById('form-error').textContent = `⚠️ Erro de conexão: ${error.message}. Verifique sua internet ou tente novamente.`;
-            document.getElementById('form-error').style.display = 'block';
-        }
-    }
-
-    function saveAppsScriptUrlPreLogin() {
-        const url = document.getElementById('appsScriptUrlPreLogin').value.trim();
-        if (url) {
-            localStorage.setItem('belgitourAppsScriptUrl', url);
-            appsScriptUrl = url;
-            document.getElementById('appsScriptUrl').value = url; // Atualiza o campo pós-login também
-            alert('URL do Apps Script salva com sucesso! (Apps Script URL saved successfully!)');
-            // Oculta a mensagem de erro se estava visível
-            document.getElementById('login-error').style.display = 'none';
-        } else {
-            alert('Por favor, insira uma URL válida. (Please enter a valid URL.)');
-        }
-    }
-
-    async function loginAdmin() {
-        const password = document.getElementById('adminPassword').value;
-        if (!appsScriptUrl) {
-            document.getElementById('login-error').textContent = 'Configure a URL do Apps Script antes de entrar.';
-            document.getElementById('login-error').style.display = 'block';
-            return;
         }
 
-        try {
-            const response = await fetch(`${appsScriptUrl}?action=listarClientes&amp;senha=${password}`, {
-                method: 'GET',
-                mode: 'cors'
-            });
-            const data = await response.json();
-
-            if (data.erro) {
-                document.getElementById('login-error').textContent = data.erro;
-                document.getElementById('login-error').style.display = 'block';
-            } else {
-                adminLoggedIn = true;
+        function saveAppsScriptUrlPreLogin() {
+            const url = document.getElementById('appsScriptUrlPreLogin').value.trim();
+            if (url) {
+                localStorage.setItem('belgitourAppsScriptUrl', url);
+                appsScriptUrl = url;
+                document.getElementById('appsScriptUrl').value = url; // Atualiza o campo pós-login também
+                alert('URL do Apps Script salva com sucesso! (Apps Script URL saved successfully!)');
+                // Oculta a mensagem de erro se estava visível
                 document.getElementById('login-error').style.display = 'none';
-                document.querySelector('.admin-login').style.display = 'none';
-                document.querySelector('.admin-dashboard').style.display = 'block';
-                loadClients();
+            } else {
+                alert('Por favor, insira uma URL válida. (Please enter a valid URL.)');
             }
-        } catch (error) {
-            document.getElementById('login-error').textContent = `Erro de conexão: ${error.message}. Verifique a URL do Apps Script.`;
-            document.getElementById('login-error').style.display = 'block';
         }
-    }
 
-    function logoutAdmin() {
-        adminLoggedIn = false;
-        window.location.hash = '#painel'; // Redireciona para o painel para mostrar a tela de login
-        updateHash(); // Atualiza a visualização
-    }
-
-    function saveAppsScriptUrl() {
-        const url = document.getElementById('appsScriptUrl').value.trim();
-        if (url) {
-            localStorage.setItem('belgitourAppsScriptUrl', url);
-            appsScriptUrl = url;
-            document.getElementById('appsScriptUrlPreLogin').value = url; // Atualiza o campo pré-login também
-            alert('URL do Apps Script salva com sucesso! (Apps Script URL saved successfully!)');
-        } else {
-            alert('Por favor, insira uma URL válida. (Please enter a valid URL.)');
-        }
-    }
-
-    async function loadClients() {
-        if (!adminLoggedIn || !appsScriptUrl) return;
-
-        const clientListDiv = document.getElementById('client-list');
-        clientListDiv.innerHTML = '&lt;p&gt;Carregando clientes...&lt;/p&gt;';
-
-        try {
-            const password = document.getElementById('adminPassword').value; // Pega a senha do campo de login
-            const response = await fetch(`${appsScriptUrl}?action=listarClientes&amp;senha=${password}`, {
-                method: 'GET',
-                mode: 'cors'
-            });
-            const data = await response.json();
-
-            if (data.erro) {
-                clientListDiv.innerHTML = `&lt;p class="message error"&gt;${data.erro}&lt;/p&gt;`;
+        async function loginAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            if (!appsScriptUrl) {
+                document.getElementById('login-error').textContent = 'Configure a URL do Apps Script antes de entrar.';
+                document.getElementById('login-error').style.display = 'block';
                 return;
             }
 
-            const clients = data.clientes;
-            let tableHtml = `
-                &lt;table&gt;
-                    &lt;thead&gt;
-                        &lt;tr&gt;
-                            &lt;th&gt;Nome&lt;/th&gt;
-                            &lt;th&gt;Destino&lt;/th&gt;
-                            &lt;th&gt;Período&lt;/th&gt;
-                            &lt;th&gt;Status&lt;/th&gt;
-                            &lt;th&gt;Código&lt;/th&gt;
-                            &lt;th&gt;Ações&lt;/th&gt;
-                        &lt;/tr&gt;
-                    &lt;/thead&gt;
-                    &lt;tbody&gt;
-            `;
+            try {
+                const response = await fetch(`${appsScriptUrl}?action=listarClientes&senha=${password}`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                const data = await response.json();
 
-            let total = 0;
-            let pendentes = 0;
-            let gerados = 0;
-            let aprovados = 0;
+                if (data.erro) {
+                    document.getElementById('login-error').textContent = data.erro;
+                    document.getElementById('login-error').style.display = 'block';
+                } else {
+                    adminLoggedIn = true;
+                    document.getElementById('login-error').style.display = 'none';
+                    document.querySelector('.admin-login').style.display = 'none';
+                    document.querySelector('.admin-dashboard').style.display = 'block';
+                    loadClients();
+                }
+            } catch (error) {
+                document.getElementById('login-error').textContent = `Erro de conexão: ${error.message}. Verifique a URL do Apps Script.`;
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
 
-            clients.forEach(client =&gt; {
-                total++;
-                if (client.status === 'PENDENTE') pendentes++;
-                if (client.status === 'GERADO') gerados++;
-                if (client.status === 'APROVADO') aprovados++;
+        function logoutAdmin() {
+            adminLoggedIn = false;
+            window.location.hash = '#painel'; // Redireciona para o painel para mostrar a tela de login
+            updateHash(); // Atualiza a visualização
+        }
+
+        function saveAppsScriptUrl() {
+            const url = document.getElementById('appsScriptUrl').value.trim();
+            if (url) {
+                localStorage.setItem('belgitourAppsScriptUrl', url);
+                appsScriptUrl = url;
+                document.getElementById('appsScriptUrlPreLogin').value = url; // Atualiza o campo pré-login também
+                alert('URL do Apps Script salva com sucesso! (Apps Script URL saved successfully!)');
+            } else {
+                alert('Por favor, insira uma URL válida. (Please enter a valid URL.)');
+            }
+        }
+
+        async function loadClients() {
+            if (!adminLoggedIn || !appsScriptUrl) return;
+
+            const clientListDiv = document.getElementById('client-list');
+            clientListDiv.innerHTML = '<p>Carregando clientes...</p>';
+
+            try {
+                const password = document.getElementById('adminPassword').value; // Pega a senha do campo de login
+                const response = await fetch(`${appsScriptUrl}?action=listarClientes&senha=${password}`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                const data = await response.json();
+
+                if (data.erro) {
+                    clientListDiv.innerHTML = `<p class="message error">${data.erro}</p>`;
+                    return;
+                }
+
+                const clients = data.clientes;
+                let tableHtml = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Destino</th>
+                                <th>Período</th>
+                                <th>Status</th>
+                                <th>Código</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                let total = 0;
+                let pendentes = 0;
+                let gerados = 0;
+                let aprovados = 0;
+
+                clients.forEach(client => {
+                    total++;
+                    if (client.status === 'PENDENTE') pendentes++;
+                    if (client.status === 'GERADO') gerados++;
+                    if (client.status === 'APROVADO') aprovados++;
+
+                    tableHtml += `
+                        <tr>
+                            <td>${client.nome}</td>
+                            <td>${client.destino}</td>
+                            <td>${client.dataIda} - ${client.dataVolta}</td>
+                            <td>${client.status}</td>
+                            <td>${client.codigo || 'N/A'}</td>
+                            <td>
+                                <button onclick="openRoteiroModal(${client.idx}, '${client.nome}', '${client.destino}', '${client.dataIda}', '${client.dataVolta}', '${client.viajantes}', '${client.quemVai}', '${client.estilo}', '${client.orcamento}', '${client.acomodacao}', '${client.ritmo}', '${client.interesses}', '${client.sonhos}', '${client.naoquero}', '${client.alimentar}', '${client.mobilidade}', '${client.locomocao}', \`${client.roteiro}\`, \`${client.vouchers}\`)">Ver/Editar/Gerar Roteiro</button>
+                            </td>
+                        </tr>
+                    `;
+                });
 
                 tableHtml += `
-                    &lt;tr&gt;
-                        &lt;td&gt;${client.nome}&lt;/td&gt;
-                        &lt;td&gt;${client.destino}&lt;/td&gt;
-                        &lt;td&gt;${client.dataIda} - ${client.dataVolta}&lt;/td&gt;
-                        &lt;td&gt;${client.status}&lt;/td&gt;
-                        &lt;td&gt;${client.codigo || 'N/A'}&lt;/td&gt;
-                        &lt;td&gt;
-                            &lt;button onclick="openRoteiroModal(${client.idx}, '${client.nome}', '${client.destino}', '${client.dataIda}', '${client.dataVolta}', '${client.viajantes}', '${client.quemVai}', '${client.estilo}', '${client.orcamento}', '${client.acomodacao}', '${client.ritmo}', '${client.interesses}', '${client.sonhos}', '${client.naoquero}', '${client.alimentar}', '${client.mobilidade}', '${client.locomocao}', \`${client.roteiro}\`, \`${client.vouchers}\`)"&gt;Ver/Editar/Gerar Roteiro&lt;/button&gt;
-                        &lt;/td&gt;
-                    &lt;/tr&gt;
+                        </tbody>
+                    </table>
                 `;
-            });
+                clientListDiv.innerHTML = clients.length > 0 ? tableHtml : '<p>Nenhum cliente encontrado.</p>';
 
-            tableHtml += `
-                    &lt;/tbody&gt;
-                &lt;/table&gt;
-            `;
-            clientListDiv.innerHTML = clients.length &gt; 0 ? tableHtml : '&lt;p&gt;Nenhum cliente encontrado.&lt;/p&gt;';
+                document.getElementById('totalClientes').textContent = total;
+                document.getElementById('pendentes').textContent = pendentes;
+                document.getElementById('gerados').textContent = gerados;
+                document.getElementById('aprovados').textContent = aprovados;
 
-            document.getElementById('totalClientes').textContent = total;
-            document.getElementById('pendentes').textContent = pendentes;
-            document.getElementById('gerados').textContent = gerados;
-            document.getElementById('aprovados').textContent = aprovados;
-
-        } catch (error) {
-            clientListDiv.innerHTML = `&lt;p class="message error"&gt;Erro ao carregar clientes: ${error.message}&lt;/p&gt;`;
-        }
-    }
-
-    function openRoteiroModal(idx, nome, destino, dataIda, dataVolta, viajantes, quemVai, estilo, orcamento, acomodacao, ritmo, interesses, sonhos, naoquero, alimentar, mobilidade, locomocao, roteiro, vouchers) {
-        currentClientIdx = idx;
-        document.getElementById('modalClientName').textContent = nome;
-        document.getElementById('roteiroTextarea').value = roteiro === 'undefined' ? '' : roteiro;
-        document.getElementById('vouchersTextarea').value = vouchers === 'undefined' ? '' : vouchers;
-
-        // Armazena os dados do cliente atual para uso na geração do roteiro
-        window.currentClientData = {
-            idx: idx, nome: nome, destino: destino, dataIda: dataIda, dataVolta: dataVolta,
-            viajantes: viajantes, quemVai: quemVai, estilo: estilo, orcamento: orcamento,
-            acomodacao: acomodacao, ritmo: ritmo, interesses: interesses, sonhos: sonhos,
-            naoquero: naoquero, alimentar: alimentar, mobilidade: mobilidade, locomocao: locomocao
-        };
-
-        document.getElementById('roteiroModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('roteiroModal').style.display = 'none';
-        currentClientIdx = null;
-        window.currentClientData = null;
-    }
-
-    async function generateRoteiro() {
-        if (!currentClientIdx || !window.currentClientData) {
-            alert('Selecione um cliente para gerar o roteiro.');
-            return;
-        }
-
-        const confirmGenerate = confirm('Tem certeza que deseja gerar o roteiro com IA? Isso pode sobrescrever o conteúdo atual.');
-        if (!confirmGenerate) return;
-
-        const generateButton = document.querySelector('#roteiroModal button');
-        generateButton.textContent = 'Gerando... (aguarde)';
-        generateButton.disabled = true;
-
-        try {
-            const password = document.getElementById('adminPassword').value;
-            const response = await fetch(appsScriptUrl, {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'gerarRoteiro',
-                    idx: currentClientIdx,
-                    senha: password,
-                    cliente: window.currentClientData
-                })
-            });
-            const data = await response.json();
-
-            if (data.sucesso) {
-                document.getElementById('roteiroTextarea').value = data.roteiro;
-                alert('Roteiro gerado com sucesso!');
-                loadClients(); // Atualiza a lista de clientes no painel
-            } else {
-                alert(`Erro ao gerar roteiro: ${data.erro}`);
+            } catch (error) {
+                clientListDiv.innerHTML = `<p class="message error">Erro ao carregar clientes: ${error.message}</p>`;
             }
-        } catch (error) {
-            alert(`Erro de conexão ao gerar roteiro: ${error.message}`);
-        } finally {
-            generateButton.textContent = '✨ Gerar Roteiro com IA';
-            generateButton.disabled = false;
-        }
-    }
-
-    async function saveRoteiro() {
-        if (!currentClientIdx) {
-            alert('Nenhum cliente selecionado.');
-            return;
         }
 
-        const saveButton = document.querySelector('#roteiroModal .button-group button:first-child');
-        saveButton.textContent = 'Salvando...';
-        saveButton.disabled = true;
+        function openRoteiroModal(idx, nome, destino, dataIda, dataVolta, viajantes, quemVai, estilo, orcamento, acomodacao, ritmo, interesses, sonhos, naoquero, alimentar, mobilidade, locomocao, roteiro, vouchers) {
+            currentClientIdx = idx;
+            document.getElementById('modalClientName').textContent = nome;
+            document.getElementById('roteiroTextarea').value = roteiro === 'undefined' ? '' : roteiro;
+            document.getElementById('vouchersTextarea').value = vouchers === 'undefined' ? '' : vouchers;
 
-        try {
-            const password = document.getElementById('adminPassword').value;
-            const response = await fetch(appsScriptUrl, {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'salvarRoteiro',
-                    idx: currentClientIdx,
-                    senha: password,
-                    roteiro: document.getElementById('roteiroTextarea').value,
-                    vouchers: document.getElementById('vouchersTextarea').value
-                })
-            });
-            const data = await response.json();
+            // Armazena os dados do cliente atual para uso na geração do roteiro
+            window.currentClientData = {
+                idx: idx, nome: nome, destino: destino, dataIda: dataIda, dataVolta: dataVolta,
+                viajantes: viajantes, quemVai: quemVai, estilo: estilo, orcamento: orcamento,
+                acomodacao: acomodacao, ritmo: ritmo, interesses: interesses, sonhos: sonhos,
+                naoquero: naoquero, alimentar: alimentar, mobilidade: mobilidade, locomocao: locomocao
+            };
 
-            if (data.sucesso) {
-                alert('Roteiro e vouchers salvos com sucesso!');
-                loadClients();
-            } else {
-                alert(`Erro ao salvar: ${data.erro}`);
+            document.getElementById('roteiroModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('roteiroModal').style.display = 'none';
+            currentClientIdx = null;
+            window.currentClientData = null;
+        }
+
+        async function generateRoteiro() {
+            if (!currentClientIdx || !window.currentClientData) {
+                alert('Selecione um cliente para gerar o roteiro.');
+                return;
             }
-        } catch (error) {
-            alert(`Erro de conexão ao salvar: ${error.message}`);
-        } finally {
-            saveButton.textContent = '💾 Salvar alterações';
-            saveButton.disabled = false;
-        }
-    }
 
-    async function approveRoteiro() {
-        if (!currentClientIdx) {
-            alert('Nenhum cliente selecionado.');
-            return;
-        }
+            const confirmGenerate = confirm('Tem certeza que deseja gerar o roteiro com IA? Isso pode sobrescrever o conteúdo atual.');
+            if (!confirmGenerate) return;
 
-        const approveButton = document.querySelector('#roteiroModal .button-group button:last-child');
-        approveButton.textContent = 'Aprovando...';
-        approveButton.disabled = true;
+            const generateButton = document.querySelector('#roteiroModal button');
+            generateButton.textContent = 'Gerando... (aguarde)';
+            generateButton.disabled = true;
 
-        try {
-            const password = document.getElementById('adminPassword').value;
-            const response = await fetch(appsScriptUrl, {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'aprovarRoteiro',
-                    idx: currentClientIdx,
-                    senha: password,
-                    roteiro: document.getElementById('roteiroTextarea').value,
-                    vouchers: document.getElementById('vouchersTextarea').value
-                })
-            });
-            const data = await response.json();
+            try {
+                const password = document.getElementById('adminPassword').value;
+                const response = await fetch(appsScriptUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'gerarRoteiro',
+                        idx: currentClientIdx,
+                        senha: password,
+                        cliente: window.currentClientData
+                    })
+                });
+                const data = await response.json();
 
-            if (data.sucesso) {
-                alert(`Roteiro aprovado! Código gerado: ${data.codigo}`);
-                closeModal();
-                loadClients();
-            } else {
-                alert(`Erro ao aprovar: ${data.erro}`);
+                if (data.sucesso) {
+                    document.getElementById('roteiroTextarea').value = data.roteiro;
+                    alert('Roteiro gerado com sucesso!');
+                    loadClients(); // Atualiza a lista de clientes no painel
+                } else {
+                    alert(`Erro ao gerar roteiro: ${data.erro}`);
+                }
+            } catch (error) {
+                alert(`Erro de conexão ao gerar roteiro: ${error.message}`);
+            } finally {
+                generateButton.textContent = '✨ Gerar Roteiro com IA';
+                generateButton.disabled = false;
             }
-        } catch (error) {
-            alert(`Erro de conexão ao aprovar: ${error.message}`);
-        } finally {
-            approveButton.textContent = '✅ Aprovar e gerar código';
-            approveButton.disabled = false;
-        }
-    }
-
-    async function fetchClientRoteiro() {
-        const codigo = document.getElementById('clientCodeInput').value;
-        if (!codigo) {
-            document.getElementById('client-error').textContent = 'Por favor, insira o código do roteiro.';
-            document.getElementById('client-error').style.display = 'block';
-            return;
-        }
-        document.getElementById('client-error').style.display = 'none';
-
-        if (!appsScriptUrl) {
-            document.getElementById('client-error').textContent = 'Erro: URL do Apps Script não configurada no painel administrativo.';
-            document.getElementById('client-error').style.display = 'block';
-            return;
         }
 
-        try {
-            const response = await fetch(`${appsScriptUrl}?action=buscarRoteiro&amp;codigo=${codigo}`, {
-                method: 'GET',
-                mode: 'cors'
-            });
-            const data = await response.json();
+        async function saveRoteiro() {
+            if (!currentClientIdx) {
+                alert('Nenhum cliente selecionado.');
+                return;
+            }
 
-            if (data.erro) {
-                document.getElementById('client-error').textContent = data.erro;
+            const saveButton = document.querySelector('#roteiroModal .button-group button:first-child');
+            saveButton.textContent = 'Salvando...';
+            saveButton.disabled = true;
+
+            try {
+                const password = document.getElementById('adminPassword').value;
+                const response = await fetch(appsScriptUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'salvarRoteiro',
+                        idx: currentClientIdx,
+                        senha: password,
+                        roteiro: document.getElementById('roteiroTextarea').value,
+                        vouchers: document.getElementById('vouchersTextarea').value
+                    })
+                });
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    alert('Roteiro e vouchers salvos com sucesso!');
+                    loadClients();
+                } else {
+                    alert(`Erro ao salvar: ${data.erro}`);
+                }
+            } catch (error) {
+                alert(`Erro de conexão ao salvar: ${error.message}`);
+            } finally {
+                saveButton.textContent = '💾 Salvar alterações';
+                saveButton.disabled = false;
+            }
+        }
+
+        async function approveRoteiro() {
+            if (!currentClientIdx) {
+                alert('Nenhum cliente selecionado.');
+                return;
+            }
+
+            const approveButton = document.querySelector('#roteiroModal .button-group button:last-child');
+            approveButton.textContent = 'Aprovando...';
+            approveButton.disabled = true;
+
+            try {
+                const password = document.getElementById('adminPassword').value;
+                const response = await fetch(appsScriptUrl, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'aprovarRoteiro',
+                        idx: currentClientIdx,
+                        senha: password,
+                        roteiro: document.getElementById('roteiroTextarea').value,
+                        vouchers: document.getElementById('vouchersTextarea').value
+                    })
+                });
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    alert(`Roteiro aprovado! Código gerado: ${data.codigo}`);
+                    closeModal();
+                    loadClients();
+                } else {
+                    alert(`Erro ao aprovar: ${data.erro}`);
+                }
+            } catch (error) {
+                alert(`Erro de conexão ao aprovar: ${error.message}`);
+            } finally {
+                approveButton.textContent = '✅ Aprovar e gerar código';
+                approveButton.disabled = false;
+            }
+        }
+
+        async function fetchClientRoteiro() {
+            const codigo = document.getElementById('clientCodeInput').value;
+            if (!codigo) {
+                document.getElementById('client-error').textContent = 'Por favor, insira o código do roteiro.';
+                document.getElementById('client-error').style.display = 'block';
+                return;
+            }
+            document.getElementById('client-error').style.display = 'none';
+
+            if (!appsScriptUrl) {
+                document.getElementById('client-error').textContent = 'Erro: URL do Apps Script não configurada no painel administrativo.';
+                document.getElementById('client-error').style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${appsScriptUrl}?action=buscarRoteiro&codigo=${codigo}`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                const data = await response.json();
+
+                if (data.erro) {
+                    document.getElementById('client-error').textContent = data.erro;
+                    document.getElementById('client-error').style.display = 'block';
+                    document.getElementById('clientRoteiroDisplay').style.display = 'none';
+                } else {
+                    document.getElementById('client-error').style.display = 'none';
+                    document.getElementById('clientRoteiroDisplay').style.display = 'block';
+
+                    document.getElementById('displayDestino').textContent = data.destino;
+                    document.getElementById('displayPeriodo').textContent = `${data.dataIda} - ${data.dataVolta}`;
+                    document.getElementById('displayStatus').textContent = 'APROVADO'; // Sempre aprovado se chegou aqui
+
+                    // Hero Image (Unsplash API)
+                    const unsplashUrl = `https://source.unsplash.com/featured/1600x900/?${data.destino.split(' ')[0]}`;
+                    document.getElementById('heroImage').src = unsplashUrl;
+                    document.getElementById('heroImage').alt = `Imagem de ${data.destino}`;
+
+                    // Roteiro Content
+                    document.getElementById('roteiroHtmlContent').innerHTML = formatRoteiroHtml(data.roteiro);
+
+                    // Vouchers Content
+                    document.getElementById('vouchersHtmlContent').innerHTML = formatVouchersHtml(data.vouchers);
+
+                    openTab(null, 'roteiroContent'); // Abre a aba de roteiro por padrão
+                }
+            } catch (error) {
+                document.getElementById('client-error').textContent = `Erro de conexão: ${error.message}. Verifique sua internet ou tente novamente.`;
                 document.getElementById('client-error').style.display = 'block';
                 document.getElementById('clientRoteiroDisplay').style.display = 'none';
-            } else {
-                document.getElementById('client-error').style.display = 'none';
-                document.getElementById('clientRoteiroDisplay').style.display = 'block';
-
-                document.getElementById('displayDestino').textContent = data.destino;
-                document.getElementById('displayPeriodo').textContent = `${data.dataIda} - ${data.dataVolta}`;
-                document.getElementById('displayStatus').textContent = 'APROVADO'; // Sempre aprovado se chegou aqui
-
-                // Hero Image (Unsplash API)
-                const unsplashUrl = `https://source.unsplash.com/featured/1600x900/?${data.destino.split(' ')[0]}`;
-                document.getElementById('heroImage').src = unsplashUrl;
-                document.getElementById('heroImage').alt = `Imagem de ${data.destino}`;
-
-                // Roteiro Content
-                document.getElementById('roteiroHtmlContent').innerHTML = formatRoteiroHtml(data.roteiro);
-
-                // Vouchers Content
-                document.getElementById('vouchersHtmlContent').innerHTML = formatVouchersHtml(data.vouchers);
-
-                openTab(null, 'roteiroContent'); // Abre a aba de roteiro por padrão
             }
-        } catch (error) {
-            document.getElementById('client-error').textContent = `Erro de conexão: ${error.message}. Verifique sua internet ou tente novamente.`;
-            document.getElementById('client-error').style.display = 'block';
-            document.getElementById('clientRoteiroDisplay').style.display = 'none';
         }
-    }
 
-    function formatRoteiroHtml(roteiroText) {
-        if (!roteiroText) return '&lt;p&gt;Roteiro não disponível.&lt;/p&gt;';
+        function formatRoteiroHtml(roteiroText) {
+            if (!roteiroText) return '<p>Roteiro não disponível.</p>';
 
-        let html = '';
-        const sections = roteiroText.split('═══════════════════════════════════════');
+            let html = '';
+            const sections = roteiroText.split('═══════════════════════════════════════');
 
-        sections.forEach(section =&gt; {
-            section = section.trim();
-            if (!section) return;
+            sections.forEach(section => {
+                section = section.trim();
+                if (!section) return;
 
-            if (section.startsWith('DIA')) {
-                const lines = section.split('\n').filter(line =&gt; line.trim() !== '');
-                const titleLine = lines.shift(); // DIA [N] — [CIDADE/REGIÃO] | [Título temático e evocador]
-                const introParagraph = lines.shift(); // Parágrafo introdutório
+                if (section.startsWith('DIA')) {
+                    const lines = section.split('\n').filter(line => line.trim() !== '');
+                    const titleLine = lines.shift(); // DIA [N] — [CIDADE/REGIÃO] | [Título temático e evocador]
+                    const introParagraph = lines.shift(); // Parágrafo introdutório
 
-                html += `&lt;div class="day-card"&gt;`;
-                html += `&lt;h4&gt;${titleLine.replace('═══════════════════════════════════════', '').trim()}&lt;/h4&gt;`;
-                if (introParagraph) html += `&lt;p&gt;${introParagraph}&lt;/p&gt;`;
+                    html += `<div class="day-card">`;
+                    html += `<h4>${titleLine.replace('═══════════════════════════════════════', '').trim()}</h4>`;
+                    if (introParagraph) html += `<p>${introParagraph}</p>`;
 
-                let currentSection = '';
-                lines.forEach(line =&gt; {
-                    line = line.trim();
-                    if (line.startsWith('🌅 MANHÃ')) { currentSection = 'MANHÃ'; html += `&lt;h5&gt;🌅 MANHÃ&lt;/h5&gt;&lt;ul&gt;`; }
-                    else if (line.startsWith('☕ CAFÉ DA MANHÃ / ALMOÇO')) { currentSection = 'CAFÉ DA MANHÃ / ALMOÇO'; html += `&lt;/ul&gt;&lt;h5&gt;☕ CAFÉ DA MANHÃ / ALMOÇO&lt;/h5&gt;&lt;ul&gt;`; }
-                    else if (line.startsWith('☀️ TARDE')) { currentSection = 'TARDE'; html += `&lt;/ul&gt;&lt;h5&gt;☀️ TARDE&lt;/h5&gt;&lt;ul&gt;`; }
-                    else if (line.startsWith('🍽️ JANTAR')) { currentSection = 'JANTAR'; html += `&lt;/ul&gt;&lt;h5&gt;🍽️ JANTAR&lt;/h5&gt;&lt;ul&gt;`; }
-                    else if (line.startsWith('🌙 NOITE')) { currentSection = 'NOITE'; html += `&lt;/ul&gt;&lt;h5&gt;🌙 NOITE&lt;/h5&gt;&lt;ul&gt;`; }
-                    else if (line.startsWith('•')) {
-                        let item = line.substring(1).trim();
-                        html += `&lt;li&gt;${item}`;
-                    }
-                    else if (line.startsWith('💡 Dica do Renan:')) {
-                        html += `&lt;p class="tip"&gt;${line}&lt;/p&gt;`;
-                    }
-                    else if (line.startsWith('📍')) {
-                        const link = line.substring(1).trim();
-                        html += `&lt;p&gt;&lt;a href="${link}" target="_blank"&gt;📍 Ver no Google Maps&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;`;
-                    }
-                    else if (line.startsWith('---')) { // Separador de blocos, ignorar
-                        // No-op
-                    }
-                    else if (line) { // Qualquer outra linha que não seja uma seção ou item específico
-                        html += `&lt;p&gt;${line}&lt;/p&gt;`;
-                    }
-                });
-                html += `&lt;/ul&gt;&lt;/div&gt;`; // Fecha o último ul e o day-card
-            } else {
-                // Seções finais
-                const titleMatch = section.match(/^(✅ CHECKLIST ANTES DE VIAJAR|💡 DICAS ESSENCIAIS DA BELGITOUR|💰 ORÇAMENTO ESTIMADO |$BRL$||🗣️ FRASES ÚTEIS|🚨 EMERGÊNCIA &amp; CONTATOS|📱 APPS INDISPENSÁVEIS|🍽️ GASTRONOMIA LOCAL)/);
-                if (titleMatch) {
-                    html += `&lt;h4 class="section-title"&gt;${titleMatch[0]}&lt;/h4&gt;`;
-                    html += `&lt;p&gt;${section.substring(titleMatch[0].length).trim().replace(/\n/g, '&lt;br&gt;')}&lt;/p&gt;`;
+                    let currentSection = '';
+                    lines.forEach(line => {
+                        line = line.trim();
+                        if (line.startsWith('🌅 MANHÃ')) { currentSection = 'MANHÃ'; html += `<h5>🌅 MANHÃ</h5><ul>`; }
+                        else if (line.startsWith('☕ CAFÉ DA MANHÃ / ALMOÇO')) { currentSection = 'CAFÉ DA MANHÃ / ALMOÇO'; html += `</ul><h5>☕ CAFÉ DA MANHÃ / ALMOÇO</h5><ul>`; }
+                        else if (line.startsWith('☀️ TARDE')) { currentSection = 'TARDE'; html += `</ul><h5>☀️ TARDE</h5><ul>`; }
+                        else if (line.startsWith('🍽️ JANTAR')) { currentSection = 'JANTAR'; html += `</ul><h5>🍽️ JANTAR</h5><ul>`; }
+                        else if (line.startsWith('🌙 NOITE')) { currentSection = 'NOITE'; html += `</ul><h5>🌙 NOITE</h5><ul>`; }
+                        else if (line.startsWith('•')) {
+                            let item = line.substring(1).trim();
+                            html += `<li>${item}`;
+                        }
+                        else if (line.startsWith('💡 Dica do Renan:')) {
+                            html += `<p class="tip">${line}</p>`;
+                        }
+                        else if (line.startsWith('📍')) {
+                            const link = line.substring(1).trim();
+                            html += `<p><a href="${link}" target="_blank">📍 Ver no Google Maps</a></p></li>`;
+                        }
+                        else if (line.startsWith('---')) { // Separador de blocos, ignorar
+                            // No-op
+                        }
+                        else if (line) { // Qualquer outra linha que não seja uma seção ou item específico
+                            html += `<p>${line}</p>`;
+                        }
+                    });
+                    html += `</ul></div>`; // Fecha o último ul e o day-card
                 } else {
-                    // Frase final inspiradora
-                    html += `&lt;p style="text-align: center; font-style: italic; margin-top: 2rem;"&gt;${section.trim().replace(/\n/g, '&lt;br&gt;')}&lt;/p&gt;`;
+                    // Seções finais
+                    const titleMatch = section.match(/
+^
+(✅ CHECKLIST ANTES DE VIAJAR|💡 DICAS ESSENCIAIS DA BELGITOUR|💰 ORÇAMENTO ESTIMADO |
+$
+BRL
+$
+||🗣️ FRASES ÚTEIS|🚨 EMERGÊNCIA & CONTATOS|📱 APPS INDISPENSÁVEIS|🍽️ GASTRONOMIA LOCAL)/);
+                    if (titleMatch) {
+                        html += `<h4 class="section-title">${titleMatch[0]}</h4>`;
+                        html += `<p>${section.substring(titleMatch[0].length).trim().replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                        // Frase final inspiradora
+                        html += `<p style="text-align: center; font-style: italic; margin-top: 2rem;">${section.trim().replace(/\n/g, '<br>')}</p>`;
+                    }
                 }
-            }
-        });
+            });
 
-        return html;
-    }
-
-
-    function formatVouchersHtml(vouchersText) {
-        if (!vouchersText) return '&lt;p&gt;Nenhum documento ou voucher adicionado ainda.&lt;/p&gt;';
-        const links = vouchersText.split('\n').filter(line =&gt; line.trim() !== '');
-        let html = '&lt;ul&gt;';
-        links.forEach(link =&gt; {
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            const matches = link.match(urlRegex);
-            if (matches &amp;&amp; matches.length &gt; 0) {
-                const url = matches[0];
-                const text = link.replace(url, '').trim() || url; // Usa o texto antes da URL ou a própria URL
-                html += `&lt;li&gt;&lt;a href="${url}" target="_blank"&gt;${text}&lt;/a&gt;&lt;/li&gt;`;
-            } else {
-                html += `&lt;li&gt;${link}&lt;/li&gt;`;
-            }
-        });
-        html += '&lt;/ul&gt;';
-        return html;
-    }
-
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i &lt; tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+            return html;
         }
-        tablinks = document.getElementsByClassName("tab-button");
-        for (i = 0; i &lt; tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        if (evt) evt.currentTarget.className += " active";
-        else document.querySelector(`.tab-button[onclick*="${tabName}"]`).className += " active";
-    }
 
-&lt;/script&gt;
+
+        function formatVouchersHtml(vouchersText) {
+            if (!vouchersText) return '<p>Nenhum documento ou voucher adicionado ainda.</p>';
+            const links = vouchersText.split('\n').filter(line => line.trim() !== '');
+            let html = '<ul>';
+            links.forEach(link => {
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                const matches = link.match(urlRegex);
+                if (matches && matches.length > 0) {
+                    const url = matches[0];
+                    const text = link.replace(url, '').trim() || url; // Usa o texto antes da URL ou a própria URL
+                    html += `<li><a href="${url}" target="_blank">${text}</a></li>`;
+                } else {
+                    html += `<li>${link}</li>`;
+                }
+            });
+            html += '</ul>';
+            return html;
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            if (evt) evt.currentTarget.className += " active";
+            else document.querySelector(`.tab-button[onclick*="${tabName}"]`).className += " active";
+        }
+
+    </script>
 </body>
 </html>
