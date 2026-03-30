@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #A0522D; /* Marrom terroso, elegante */
-            --secondary-color: #D2B48C; /* Bege claro, suave */
-            --accent-color: #8B4513; /* Marrom mais escuro para detalhes */
+            --primary-color: #8B4513; /* Marrom para combinar com o tom "terroso" da Belgitour */
+            --secondary-color: #D2B48C; /* Bege claro */
+            --accent-color: #A0522D; /* Marrom mais escuro */
             --text-color: #333;
             --light-text-color: #666;
             --background-color: #FDF5E6; /* Creme suave */
@@ -17,8 +17,6 @@
             --border-color: #E0E0E0;
             --success-color: #28a745;
             --error-color: #dc3545;
-            --shadow-light: rgba(0,0,0,0.05);
-            --shadow-medium: rgba(0,0,0,0.1);
         }
 
         body {
@@ -38,19 +36,19 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 2px 4px var(--shadow-medium);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
             font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
             font-weight: 700;
         }
 
         header p {
-            margin: 0.2rem 0 0;
-            font-size: 0.9rem;
+            margin: 0.2rem 0 0 0;
+            font-size: 1rem;
             font-weight: 400;
         }
 
@@ -59,30 +57,25 @@
             margin: 2rem auto;
             padding: 1.5rem;
             background-color: var(--card-background);
-            border-radius: 12px; /* Bordas mais suaves */
-            box-shadow: 0 6px 20px var(--shadow-medium); /* Sombra mais pronunciada */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
         }
 
         h2 {
             color: var(--primary-color);
-            font-size: 1.8rem;
             font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
             margin-top: 0;
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         h3 {
             color: var(--accent-color);
-            font-size: 1.4rem;
-            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
             margin-top: 1.5rem;
         }
 
@@ -91,7 +84,6 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--light-text-color);
-            text-align: left;
         }
 
         input[type="text"],
@@ -102,31 +94,18 @@
         textarea,
         select {
             width: calc(100% - 20px);
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 8px; /* Bordas mais suaves */
+            border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        input[type="date"]:focus,
-        input[type="password"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
-            outline: none;
         }
 
         textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         .checkbox-group, .interest-group {
@@ -134,21 +113,19 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 1rem;
-            justify-content: center;
         }
 
         .checkbox-group label, .interest-group label {
             background-color: var(--secondary-color);
-            padding: 10px 18px;
-            border-radius: 25px; /* Mais arredondado */
+            padding: 10px 15px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease;
             font-weight: 400;
             color: var(--text-color);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 5px var(--shadow-light);
+            gap: 5px;
         }
 
         .checkbox-group input[type="checkbox"], .interest-group input[type="checkbox"] {
@@ -158,69 +135,49 @@
         .checkbox-group input[type="checkbox"]:checked + label, .interest-group input[type="checkbox"]:checked + label {
             background-color: var(--primary-color);
             color: white;
-            box-shadow: 0 2px 8px var(--shadow-medium);
         }
 
         button {
             background-color: var(--primary-color);
             color: white;
-            padding: 14px 25px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 10px var(--shadow-medium);
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
         }
 
         button:hover {
             background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .button-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
-            width: 100%;
-            max-width: 400px; /* Limita a largura dos botões em formulários */
-            gap: 15px;
+            margin-top: 1.5rem;
         }
 
         .button-group button {
             margin-top: 0;
-            flex: 1;
-            font-size: 1rem;
-            padding: 12px 15px;
         }
 
         .button-group button:first-child {
             background-color: var(--secondary-color);
             color: var(--text-color);
-            box-shadow: 0 2px 5px var(--shadow-light);
         }
 
         .button-group button:first-child:hover {
             background-color: #c0a080;
-            color: var(--text-color);
         }
 
-        .form-step, .home-screen {
+        .form-step {
             display: none;
-            width: 100%;
-            max-width: 600px; /* Limita a largura dos formulários */
-            margin: 0 auto;
-            text-align: left;
         }
 
-        .form-step.active, .home-screen.active {
+        .form-step.active {
             display: block;
         }
 
@@ -229,15 +186,13 @@
             margin-bottom: 1.5rem;
             font-weight: 600;
             color: var(--light-text-color);
-            font-size: 0.95rem;
         }
 
         .message {
             padding: 1rem;
             margin-bottom: 1rem;
-            border-radius: 8px;
+            border-radius: 4px;
             font-weight: 600;
-            text-align: center;
         }
 
         .message.success {
@@ -252,15 +207,11 @@
             border: 1px solid #f5c6cb;
         }
 
-        .admin-panel, .client-view {
+        .home-screen, .form-section, .admin-panel, .client-view {
             display: none;
-            width: 100%;
-            max-width: 900px; /* Mais largo para o painel */
-            margin: 0 auto;
-            text-align: left;
         }
 
-        .admin-panel.active, .client-view.active {
+        .home-screen.active, .form-section.active, .admin-panel.active, .client-view.active {
             display: block;
         }
 
@@ -277,18 +228,15 @@
         }
 
         .client-code-input input {
-            width: 220px;
+            width: 200px;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             letter-spacing: 2px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .client-code-input button {
             display: block;
-            margin: 1.5rem auto;
+            margin: 1rem auto;
         }
 
         .client-roteiro-display {
@@ -299,30 +247,29 @@
 
         .client-roteiro-display h3 {
             color: var(--primary-color);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
         .client-roteiro-display .tabs {
             display: flex;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .client-roteiro-display .tab-button {
-            padding: 12px 20px;
+            padding: 10px 15px;
             cursor: pointer;
             border: none;
             background-color: transparent;
             font-weight: 600;
             color: var(--light-text-color);
-            transition: color 0.3s ease, border-bottom 0.3s ease;
-            font-size: 1rem;
+            transition: color 0.3s ease;
         }
 
         .client-roteiro-display .tab-button.active {
             color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
         }
 
         .client-roteiro-display .tab-content {
@@ -337,39 +284,36 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             background-color: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 1rem;
+            border-radius: 4px;
             border: 1px solid var(--border-color);
         }
 
         .client-roteiro-display img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 12px var(--shadow-medium);
+            border-radius: 8px;
+            margin-top: 1rem;
         }
 
         .client-roteiro-display .hero-image {
             width: 100%;
-            height: 300px; /* Altura maior para a hero image */
+            height: 250px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
         }
 
         .client-roteiro-display .status-bar {
             background-color: var(--secondary-color);
-            padding: 1.2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
             color: var(--accent-color);
-            font-size: 1.1rem;
-            box-shadow: 0 2px 8px var(--shadow-light);
         }
 
         .client-roteiro-display .status-bar span {
@@ -379,57 +323,35 @@
         .client-roteiro-display .day-card {
             background-color: var(--card-background);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 12px var(--shadow-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .client-roteiro-display .day-card h4 {
             color: var(--primary-color);
-            font-size: 1.4rem;
-            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
             margin-top: 0;
-            margin-bottom: 1.2rem;
-            border-bottom: 1px dashed var(--secondary-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .client-roteiro-display .day-card h5 {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .client-roteiro-display .day-card p {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .client-roteiro-display .day-card ul {
             list-style: none;
             padding: 0;
-            margin-left: 1rem;
         }
 
         .client-roteiro-display .day-card ul li {
-            margin-bottom: 0.7rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .client-roteiro-display .day-card ul li::before {
-            content: '•';
-            color: var(--primary-color);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
 
         .client-roteiro-display .day-card ul li a {
             color: var(--primary-color);
             text-decoration: none;
-            font-weight: 600;
         }
 
         .client-roteiro-display .day-card ul li a:hover {
@@ -439,30 +361,26 @@
         .client-roteiro-display .day-card .tip {
             font-style: italic;
             color: var(--accent-color);
-            margin-top: 0.8rem;
-            padding-left: 1.5rem;
-            border-left: 3px solid var(--secondary-color);
+            margin-top: 0.5rem;
         }
 
         .client-roteiro-display .section-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary-color);
-            font-family: 'Playfair Display', serif;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
             border-bottom: 1px dashed var(--secondary-color);
-            padding-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
         }
 
         .client-roteiro-display .vouchers-list ul {
             list-style: disc;
-            padding-left: 25px;
+            padding-left: 20px;
         }
 
         .client-roteiro-display .vouchers-list ul li a {
             color: var(--primary-color);
             text-decoration: none;
-            font-weight: 600;
         }
 
         .client-roteiro-display .vouchers-list ul li a:hover {
@@ -472,11 +390,10 @@
         footer {
             text-align: center;
             padding: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
             background-color: var(--primary-color);
             color: white;
             font-size: 0.9rem;
-            box-shadow: 0 -2px 4px var(--shadow-medium);
         }
 
         .admin-dashboard .client-list table {
@@ -487,14 +404,14 @@
 
         .admin-dashboard .client-list th, .admin-dashboard .client-list td {
             border: 1px solid var(--border-color);
-            padding: 12px;
+            padding: 10px;
             text-align: left;
         }
 
         .admin-dashboard .client-list th {
             background-color: var(--secondary-color);
             color: var(--primary-color);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .admin-dashboard .client-list tr:nth-child(even) {
@@ -503,15 +420,13 @@
 
         .admin-dashboard .client-list button {
             background-color: var(--accent-color);
-            padding: 10px 15px;
-            font-size: 0.95rem;
+            padding: 8px 12px;
+            font-size: 0.9rem;
             margin-top: 0;
-            box-shadow: none;
         }
 
         .admin-dashboard .client-list button:hover {
             background-color: var(--primary-color);
-            transform: translateY(-1px);
         }
 
         .modal {
@@ -523,7 +438,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.5);
             justify-content: center;
             align-items: center;
         }
@@ -531,22 +446,22 @@
         .modal-content {
             background-color: var(--card-background);
             margin: auto;
-            padding: 2.5rem;
-            border-radius: 12px;
+            padding: 2rem;
+            border-radius: 8px;
             width: 90%;
-            max-width: 950px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            max-width: 900px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             position: relative;
         }
 
         .close-button {
             color: #aaa;
             float: right;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             position: absolute;
-            top: 15px;
-            right: 25px;
+            top: 10px;
+            right: 20px;
             cursor: pointer;
         }
 
@@ -560,26 +475,21 @@
         .modal-content h3 {
             margin-top: 0;
             color: var(--primary-color);
-            font-size: 1.6rem;
         }
 
         .modal-content textarea {
             width: calc(100% - 20px);
-            min-height: 350px;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px var(--shadow-light);
+            min-height: 300px;
+            margin-bottom: 1rem;
         }
 
         .modal-content .button-group {
             justify-content: flex-end;
-            gap: 15px;
+            gap: 10px;
         }
 
         .modal-content .button-group button {
             margin-top: 0;
-            font-size: 1rem;
-            padding: 12px 20px;
         }
 
         .modal-content .button-group button:first-child {
@@ -589,53 +499,49 @@
 
         .modal-content .button-group button:first-child:hover {
             background-color: #c0a080;
-            color: var(--text-color);
         }
 
         .admin-dashboard .stats {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .admin-dashboard .stat-card {
             background-color: var(--secondary-color);
-            padding: 1.8rem;
-            border-radius: 10px;
+            padding: 1.5rem;
+            border-radius: 8px;
             text-align: center;
             flex: 1;
-            min-width: 200px;
-            box-shadow: 0 4px 12px var(--shadow-light);
+            min-width: 180px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .admin-dashboard .stat-card h4 {
-            margin: 0 0 0.8rem 0;
+            margin: 0 0 0.5rem 0;
             color: var(--primary-color);
-            font-size: 1.2rem;
-            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
         }
 
         .admin-dashboard .stat-card p {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--accent-color);
         }
 
         .admin-dashboard .url-config {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
             background-color: #f9f9f9;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-shadow: 0 2px 8px var(--shadow-light);
+            border-radius: 8px;
         }
 
         .admin-dashboard .url-config h3 {
             margin-top: 0;
-            font-size: 1.5rem;
         }
 
         .admin-dashboard .url-config input {
@@ -643,15 +549,12 @@
         }
 
         .admin-dashboard .url-config button {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         .admin-dashboard .logout-button {
             background-color: var(--error-color);
             margin-top: 1rem;
-            padding: 10px 15px;
-            font-size: 0.95rem;
-            box-shadow: none;
         }
 
         .admin-dashboard .logout-button:hover {
@@ -661,113 +564,85 @@
         .admin-login .error-message {
             color: var(--error-color);
             font-weight: 600;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             text-align: center;
         }
 
         .admin-login .login-form {
             text-align: center;
-            margin-top: 2rem;
-        }
-
-        .admin-login .login-form label {
-            text-align: center;
         }
 
         .admin-login .login-form input {
-            width: 280px;
-            margin-bottom: 1.5rem;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: inset 0 1px 3px var(--shadow-light);
+            width: 250px;
+            margin-bottom: 1rem;
         }
 
         .admin-login .login-form button {
-            width: 280px;
-            padding: 15px;
-            font-size: 1.1rem;
+            width: 250px;
         }
 
-        .admin-login .url-config-pre-login {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
+        .admin-login .url-config-pre-login { /* Novo estilo para o campo URL antes do login */
+            margin-bottom: 2rem;
+            padding: 1.5rem;
             background-color: #f9f9f9;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            text-align: left;
-            box-shadow: 0 2px 8px var(--shadow-light);
+            border-radius: 8px;
+            text-align: left; /* Alinha o texto à esquerda */
         }
 
         .admin-login .url-config-pre-login h3 {
             margin-top: 0;
-            text-align: center;
-            font-size: 1.5rem;
+            text-align: center; /* Centraliza o título */
         }
 
         .admin-login .url-config-pre-login input {
             width: calc(100% - 20px);
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px var(--shadow-light);
         }
 
         .admin-login .url-config-pre-login button {
-            margin-top: 1.5rem;
-            width: auto;
-            display: block;
+            margin-top: 1rem;
+            width: auto; /* Permite que o botão se ajuste ao conteúdo */
+            display: block; /* Ocupa a largura total para centralizar */
             margin-left: auto;
             margin-right: auto;
-            padding: 12px 20px;
-            font-size: 1rem;
         }
 
-        /* Home Screen Specific Styles */
+        /* Estilos para a tela de apresentação */
         .home-screen {
+            text-align: center;
+            padding: 4rem 2rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 3rem 1.5rem;
-            text-align: center;
+            min-height: 70vh; /* Ocupa a maior parte da tela */
         }
 
         .home-screen h2 {
-            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
             margin-bottom: 1rem;
-            line-height: 1.2;
-            color: var(--accent-color);
             border-bottom: none;
             padding-bottom: 0;
         }
 
         .home-screen p {
             font-size: 1.2rem;
-            color: var(--light-text-color);
-            margin-bottom: 2.5rem;
-            max-width: 500px;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
 
-        .home-screen .cta-button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 18px 35px;
-            font-size: 1.3rem;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 6px 15px var(--shadow-medium);
-            display: inline-block;
-            margin-top: 2rem;
-        }
-
-        .home-screen .cta-button:hover {
+        .home-screen button {
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 30px;
             background-color: var(--accent-color);
-            transform: translateY(-3px);
         }
 
-        .home-screen .cta-button:active {
-            transform: translateY(0);
-            box-shadow: 0 3px 8px var(--shadow-light);
+        .home-screen button:hover {
+            background-color: var(--primary-color);
         }
 
     </style>
@@ -779,19 +654,20 @@
     </header>
 
     <main class="container">
-        <!-- Home Screen -->
+        <!-- Tela de Apresentação -->
         <section id="home" class="home-screen active">
-            <h2>Sua Próxima Aventura Começa Aqui</h2>
-            <p>Descubra roteiros personalizados que transformam sua viagem em uma experiência inesquecível. Deixe a Belgitour planejar cada detalhe para você.</p>
-            <button type="button" class="cta-button" onclick="startForm()">Criar Meu Roteiro Personalizado</button>
+            <h2>Sua Jornada Começa Aqui</h2>
+            <p>Descubra roteiros personalizados que transformam sua viagem em uma experiência inesquecível. Planejamos cada detalhe para você.</p>
+            <button type="button" onclick="startForm()">Criar Meu Roteiro</button>
         </section>
 
         <!-- Formulário do Cliente -->
         <section id="form-cliente" class="form-section">
             <div class="progress-indicator"></div>
 
-            <div id="step1" class="form-step active">
+            <div id="step1" class="form-step">
                 <h2>Seu Roteiro Exclusivo</h2>
+                <p>Sua viagem dos <strong>sonhos</strong>, planejada por especialistas</p>
                 <p>Responda às perguntas abaixo e nossa equipe criará um roteiro exclusivo, revisado e personalizado para você.</p>
                 <div class="progress-indicator">1 DE 7</div>
                 <h3>Seus dados</h3>
@@ -925,7 +801,7 @@
                     <input type="checkbox" id="interesse10" value="Aventura"> <label for="interesse10">🏄 Aventura</label>
                     <input type="checkbox" id="interesse11" value="Arquitetura"> <label for="interesse11">🏛️ Arquitetura</label>
                     <input type="checkbox" id="interesse12" value="Bem-estar"> <label for="interesse12">🧘 Bem-estar</label>
-                    <input type="checkbox" id="interesse13" value="Fotografia"> <label for="interesse13">📸 Fotografia</option>
+                    <input type="checkbox" id="interesse13" value="Fotografia"> <label for="interesse13">📸 Fotografia</label>
                     <input type="checkbox" id="interesse14" value="História"> <label for="interesse14">📜 História</label>
                     <input type="checkbox" id="interesse15" value="Música"> <label for="interesse15">🎵 Música</label>
                     <input type="checkbox" id="interesse16" value="Bebidas"> <label for="interesse16">🍷 Bebidas</label>
@@ -1056,13 +932,14 @@
             <div id="roteiroModal" class="modal">
                 <div class="modal-content">
                     <span class="close-button" onclick="closeModal()">×</span>
-                    <h3>Roteiro</h3>
-                    <p>Cliente: <strong id="modalClientName"></strong></p>
-                    <button type="button" onclick="generateRoteiro()">✨ Gerar Roteiro (pode levar 30–90 seg para viagens longas)</button>
+                    <h3>Roteiro do Cliente: <span id="modalClientName"></span></h3>
+                    <button type="button" onclick="generateRoteiro()">✨ Gerar Roteiro</button>
+                    <p style="font-size: 0.8em; color: var(--light-text-color);"> (Pode levar 30–90 seg para viagens longas)</p>
                     <label for="roteiroTextarea">📝 Roteiro (edite livremente antes de aprovar):</label>
                     <textarea id="roteiroTextarea"></textarea>
                     <label for="vouchersTextarea">📄 Documentos, Vouchers & Links de Reserva:</label>
-                    <textarea id="vouchersTextarea" placeholder="Cole aqui os links de reserva de hotel, vouchers de passeios, bilhetes, etc. — um por linha.&#10;Exemplos: link do Google Drive, Booking.com, GetYourGuide, bilhete de trem..."></textarea>
+                    <textarea id="vouchersTextarea" placeholder="Cole aqui os links de reserva de hotel, vouchers de passeios, bilhetes, etc. — um por linha.
+Exemplos: link do Google Drive, Booking.com, GetYourGuide, bilhete de trem..."></textarea>
                     <div class="button-group">
                         <button type="button" onclick="saveRoteiro()">💾 Salvar alterações</button>
                         <button type="button" onclick="approveRoteiro()">✅ Aprovar e gerar código</button>
@@ -1071,25 +948,26 @@
             </div>
         </section>
 
-        <!-- Tela do Cliente para Ver Roteiro -->
+        <!-- Tela do Cliente para ver o Roteiro -->
         <section id="roteiro" class="client-view">
-            <h2>✈ Acessar meu roteiro</h2>
+            <h2>✈️ Acessar meu roteiro</h2>
             <p>Digite o código que a Belgitour enviou por WhatsApp</p>
             <div class="client-code-input">
+                <label for="clientCodeInput">Código do roteiro</label>
                 <input type="text" id="clientCodeInput" placeholder="XXXX-XXXX" maxlength="9">
                 <div id="client-error" class="message error" style="display:none;">Erro ao buscar roteiro. Tente novamente.</div>
                 <button type="button" onclick="fetchClientRoteiro()">✈️ Ver meu roteiro</button>
-                <p style="font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;">
+                <p style="font-size: 0.9em; color: var(--light-text-color); margin-top: 1rem;">
                     O código foi enviado pela equipe Belgitour após a revisão do seu roteiro.
                 </p>
             </div>
 
-            <div id="clientRoteiroDisplay" class="client-roteiro-display" style="display:none;">
-                <img id="heroImage" class="hero-image" alt="Imagem do destino">
+            <div id="clientRoteiroDisplay" class="client-roteiro-display">
+                <img id="heroImage" class="hero-image" src="" alt="Imagem do destino">
                 <div class="status-bar">
-                    <span id="displayDestino"></span>
-                    <span id="displayPeriodo"></span>
-                    <span id="displayStatus"></span>
+                    <span>Destino: <strong id="displayDestino"></strong></span>
+                    <span>Período: <strong id="displayPeriodo"></strong></span>
+                    <span>Status: <strong id="displayStatus"></strong></span>
                 </div>
                 <div class="tabs">
                     <button class="tab-button active" onclick="openTab(event, 'roteiroContent')">📅 Roteiro</button>
@@ -1153,37 +1031,36 @@
             const hash = window.location.hash;
             document.querySelectorAll('.home-screen, .form-section, .admin-panel, .client-view').forEach(section => {
                 section.style.display = 'none';
+                section.classList.remove('active'); // Garante que apenas um esteja ativo
             });
 
             if (hash === '#painel') {
-                document.getElementById('painel').style.display = 'block';
+                document.getElementById('painel').classList.add('active');
                 if (adminLoggedIn) {
-                    document.querySelector('.admin-login').style.display = 'none';
-                    document.querySelector('.admin-dashboard').style.display = 'block';
+                    document.querySelector('.admin-login').classList.remove('active');
+                    document.querySelector('.admin-dashboard').classList.add('active');
                     loadClients();
                 } else {
-                    document.querySelector('.admin-login').style.display = 'block';
-                    document.querySelector('.admin-dashboard').style.display = 'none';
+                    document.querySelector('.admin-login').classList.add('active');
+                    document.querySelector('.admin-dashboard').classList.remove('active');
                     document.getElementById('login-error').style.display = 'none';
-                    // Exibe o campo de URL do Apps Script antes do login
-                    document.querySelector('.admin-login .url-config-pre-login').style.display = 'block';
                 }
             } else if (hash === '#roteiro') {
-                document.getElementById('roteiro').style.display = 'block';
+                document.getElementById('roteiro').classList.add('active');
                 document.getElementById('clientRoteiroDisplay').style.display = 'none';
                 document.getElementById('client-error').style.display = 'none';
             } else if (hash === '#form') { // Nova hash para o formulário
-                document.getElementById('form-cliente').style.display = 'block';
+                document.getElementById('form-cliente').classList.add('active');
                 showStep(currentStep);
             }
-            else { // Default para a tela inicial
-                document.getElementById('home').style.display = 'flex';
+            else { // URL raiz ou hash inválida, mostra a tela inicial
+                document.getElementById('home').classList.add('active');
             }
         }
 
         function startForm() {
-            window.location.hash = '#form';
-            updateHash();
+            window.location.hash = '#form'; // Redireciona para a nova hash do formulário
+            showStep(1); // Inicia no primeiro passo
         }
 
         function showStep(step) {
@@ -1204,9 +1081,6 @@
         function prevStep() {
             if (currentStep > 1) {
                 showStep(currentStep - 1);
-            } else { // Se estiver no primeiro passo do formulário, volta para a home
-                window.location.hash = '#home';
-                updateHash();
             }
         }
 
@@ -1327,8 +1201,8 @@
                 } else {
                     adminLoggedIn = true;
                     document.getElementById('login-error').style.display = 'none';
-                    document.querySelector('.admin-login').style.display = 'none';
-                    document.querySelector('.admin-dashboard').style.display = 'block';
+                    document.querySelector('.admin-login').classList.remove('active');
+                    document.querySelector('.admin-dashboard').classList.add('active');
                     loadClients();
                 }
             } catch (error) {
