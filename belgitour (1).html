@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BELGITOUR - Roteiro Personalizado</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap">
+    <style>
+        :root {
+            --primary-color: #A0522D; /* Cor marrom-terra para elegância */
+            --secondary-color: #D2B48C; /* Cor bege claro para contraste */
+            --text-color: #333;
+            --light-text-color: #666;
+            --background-color: #FDF5E6; /* Creme suave */
+            --white: #fff;
+            --error-color: #D32F2F;
+            --success-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--primary-color);
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: var(--light-text-color);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .checkbox-group label, .radio-group label {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .checkbox-group input[type="checkbox"], .radio-group input[type="radio"] {
+            display: none;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked + span,
+        .radio-group input[type="radio"]:checked + span {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .checkbox-group label span, .radio-group label span {
+            display: inline-block;
+            padding: 0; /* Remove padding from span, it's on label */
+            border-radius: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background-color: #8B4513; /* Um tom mais escuro de marrom */
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success-message {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--success-color);
+            font-weight: bold;
+            display: none;
+        }
+
+        /* Painel Administrativo */
+        #admin-panel, #login-form, #access-roteiro {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #login-form h2, #admin-panel h2, #access-roteiro h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        #login-form input[type="password"], #access-roteiro input[type="text"] {
+            width: calc(100% - 20px);
+            margin-bottom: 1rem;
+        }
+
+        #login-form button, #access-roteiro button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .admin-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .admin-status .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--success-color);
+        }
+
+        .admin-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .stat-card p {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .client-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .client-item {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .client-item strong {
+            color: var(--primary-color);
+        }
+
+        .client-item .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+
+        .status-PENDENTE { background-color: #FFEB3B; color: #333; }
+        .status-GERADO { background-color: #2196F3; color: var(--white); }
+        .status-APROVADO { background-color: var(--success-color); color: var(--white); }
+
+        .client-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .client-actions button {
+            flex-grow: 1;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            justify-content: center;
+        }
+
+        #roteiro-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #roteiro-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content textarea {
+            width: calc(100% - 20px);
+            min-height: 300px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .form-navigation {
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-content .form-navigation button {
+            width: auto;
+            flex-grow: 0;
+        }
+
+        #client-roteiro-display {
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* Para manter a formatação do texto do roteiro */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+        }
+
+        #client-roteiro-display h1, #client-roteiro-display h2, #client-roteiro-display h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        #client-roteiro-display h1 { font-size: 2.2rem; }
+        #client-roteiro-display h2 { font-size: 1.8rem; }
+        #client-roteiro-display h3 { font-size: 1.4rem; }
+        #client-roteiro-display p { margin-bottom: 0.5rem; }
+        #client-roteiro-display ul { list-style-type: disc; margin-left: 20px; }
+        #client-roteiro-display li { margin-bottom: 5px; }
+
+        .roteiro-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .roteiro-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .roteiro-header p {
+            font-size: 1.2rem;
+            color: var(--light-text-color);
+        }
+
+        .roteiro-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        .roteiro-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .roteiro-nav a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .admin-url-config {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        .admin-url-config .form-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        .admin-url-config .form-group input {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+        .admin-url-config .form-group button {
+            width: auto;
+            flex-grow: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            main {
+                margin: 1rem auto;
+                padding: 1.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .form-navigation button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .checkbox-group label, .radio-group label {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+            .client-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BELGITOUR</h1>
+        <p>Experiências que ficam</p>
+    </header>
+
+    <main>
+        <section id="form-section">
+            <div class="roteiro-header">
+                <h1>✨ Roteiro Personalizado com IA</h1>
+                <p># Sua viagem dos *sonhos*, planejada por especialistas</p>
+                <p>Responda às perguntas abaixo e nossa equipe criará um roteiro exclusivo, revisado e personalizado para você.</p>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 0%;"></div>
+            </div>
+            <p class="progress-text"><span class="current-step">1</span> DE <span class="total-steps">7</span></p>
+
+            <form id="travel-form">
+                <!-- PASSO 1: Dados Pessoais -->
+                <div class="form-step active" data-step="1">
+                    <h2>Seus dados</h2>
+                    <p>Para entrarmos em contato com seu roteiro</p>
+                    <div class="form-group">
+                        <label for="nome">Nome completo *</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp *</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(DD) 9XXXX-XXXX" required>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- PASSO 2: A Viagem -->
+                <div class="form-step" data-step="2">
+                    <h2>A viagem</h2>
+                    <p>Destino, datas e quem vai</p>
+                    <div class="form-group">
+                        <label for="destino">Destino principal *</label>
+                        <input type="text" id="destino" name="destino" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataIda">Data de ida *</label>
+                        <input type="date" id="dataIda" name="dataIda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataVolta">Data de volta *</label>
+                        <input type="date" id="dataVolta" name="dataVolta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="viajantes">Nº de viajantes *</label>
+                        <select id="viajantes" name="viajantes" required>
+                            <option value="">Selecione</option>
+                            <option value="1 pessoa">1 pessoa</option>
+                            <option value="2 pessoas">2 pessoas</option>
+                            <option value="3 pessoas">3 pessoas</option>
+                            <option value="4 pessoas">4 pessoas</option>
+                            <option value="5 ou mais">5 ou mais</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quemVai">Quem vai?</label>
+                        <select id="quemVai" name="quemVai">
+                            <option value="">Selecione</option>
+                            <option value="Casal — lua de mel 💍">Casal — lua de mel 💍</option>
+                            <option value="Casal — 1ª viagem">Casal — 1ª viagem</option>
+                            <option value="Casal experiente">Casal experiente</option>
+                            <option value="Família c/ crianças">Família c/ crianças</option>
+                            <option value="Família c/ adolescentes">Família c/ adolescentes</option>
+                            <option value="Grupo de amigos">Grupo de amigos</option>
+                            <option value="Solo">Solo</option>
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- PASSO 3: Estilo & Orçamento -->
+                <div class="form-step" data-step="3">
+                    <h2>Estilo & orçamento</h2>
+                    <p>Como você gosta de viajar</p>
+                    <div class="form-group">
+                        <label for="estilo">Estilo da viagem</label>
+                        <select id="estilo" name="estilo">
+                            <option value="">Selecione</option>
+                            <option value="Romântico & Cultural">Romântico & Cultural</option>
+                            <option value="Aventura & Natureza">Aventura & Natureza</option>
+                            <option value="Gastronomia & Bem-estar">Gastronomia & Bem-estar</option>
+                            <option value="Luxo & Exclusividade">Luxo & Exclusividade</option>
+                            <option value="Mochilão">Mochilão</option>
+                            <option value="Família">Família</option>
+                            <option value="Cultural & Histórico">Cultural & Histórico</option>
+                            <option value="Praia & Relax">Praia & Relax</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orcamento">Orçamento</label>
+                        <select id="orcamento" name="orcamento">
+                            <option value="">Selecione</option>
+                            <option value="Econômico">Econômico</option>
+                            <option value="Médio">Médio</option>
+                            <option value="Médio-alto">Médio-alto</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="acomodacao">Acomodação preferida</label>
+                        <select id="acomodacao" name="acomodacao">
+                            <option value="">Selecione</option>
+                            <option value="Hotel boutique">Hotel boutique</option>
+                            <option value="Hotel 4-5 estrelas">Hotel 4-5 estrelas</option>
+                            <option value="Hotel 3 estrelas">Hotel 3 estrelas</option> <!-- Nova opção -->
+                            <option value="Hostel">Hostel</option> <!-- Nova opção -->
+                            <option value="Resort">Resort</option>
+                            <option value="Pousada típica">Pousada típica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ritmo">Ritmo da viagem</label>
+                        <select id="ritmo" name="ritmo">
+                            <option value="">Selecione</option>
+                            <option value="Tranquilo">Tranquilo</option>
+                            <option value="Moderado">Moderado</option>
+                            <option value="Intenso">Intenso</option>
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- NOVO PASSO 4: Locomoção -->
+                <div class="form-step" data-step="4">
+                    <h2>Locomoção</h2>
+                    <p>Como você prefere se locomover durante a viagem? (Selecione uma ou mais opções)</p>
+
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="locomocao" value="Locação de automóvel"> <span>Locação de automóvel</span></label>
+                        <label><input type="checkbox" name="locomocao" value="Transporte público"> <span>Transporte público</span></label>
+                        <label><input type="checkbox" name="locomocao" value="Táxi/Uber"> <span>Táxi/Uber</span></label>
+                        <label><input type="checkbox" name="locomocao" value="A pé"> <span>A pé</span></label>
+                        <label><input type="checkbox" name="locomocao" value="Bicicleta"> <span>Bicicleta</span></label>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- ANTIGO PASSO 4, AGORA PASSO 5: Interesses -->
+                <div class="form-step" data-step="5">
+                    <h2>O que você ama</h2>
+                    <p>Clique em tudo que te interessa</p>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="interesses" value="Templos"> <span>🛕 Templos</span></label>
+                        <label><input type="checkbox" name="interesses" value="Culinária de rua"> <span>🍜 Culinária de rua</span></label>
+                        <label><input type="checkbox" name="interesses" value="Alta gastronomia"> <span>⭐ Alta gastronomia</span></label>
+                        <label><input type="checkbox" name="interesses" value="Museus & Arte"> <span>🎨 Museus & Arte</span></label>
+                        <label><input type="checkbox" name="interesses" value="Noite"> <span>🍸 Noite</span></label>
+                        <label><input type="checkbox" name="interesses" value="Natureza"> <span>🌿 Natureza</span></label>
+                        <label><input type="checkbox" name="interesses" value="Compras"> <span>🛍️ Compras</span></label>
+                        <label><input type="checkbox" name="interesses" value="Tecnologia"> <span>💡 Tecnologia</span></label>
+                        <label><input type="checkbox" name="interesses" value="Alternativo"> <span>🎸 Alternativo</span></label>
+                        <label><input type="checkbox" name="interesses" value="Aventura"> <span>🏄 Aventura</span></label>
+                        <label><input type="checkbox" name="interesses" value="Arquitetura"> <span>🏛️ Arquitetura</span></label>
+                        <label><input type="checkbox" name="interesses" value="Bem-estar"> <span>🧘 Bem-estar</span></label>
+                        <label><input type="checkbox" name="interesses" value="Fotografia"> <span>📸 Fotografia</span></label>
+                        <label><input type="checkbox" name="interesses" value="História"> <span>📜 História</span></label>
+                        <label><input type="checkbox" name="interesses" value="Música"> <span>🎵 Música</span></label>
+                        <label><input type="checkbox" name="interesses" value="Bebidas"> <span>🍷 Bebidas</span></label>
+                        <label><input type="checkbox" name="interesses" value="Vida local"> <span>🏘️ Vida local</span></label>
+                        <label><input type="checkbox" name="interesses" value="Praias"> <span>🏖️ Praias</span></label>
+                    </div>
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <label for="outrosInteresses">Outros interesses</label>
+                        <textarea id="outrosInteresses" name="outrosInteresses" placeholder="Ex: Mercados de pulgas, parques temáticos, etc."></textarea>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- ANTIGO PASSO 5, AGORA PASSO 6: Sonhos -->
+                <div class="form-step" data-step="6">
+                    <h2>Seus sonhos de viagem</h2>
+                    <p>O que tornaria essa viagem inesquecível?</p>
+                    <div class="form-group">
+                        <label for="sonhos">Experiências que você sempre quis ter *</label>
+                        <textarea id="sonhos" name="sonhos" required placeholder="Ex: Ver a aurora boreal, visitar um castelo medieval, fazer um safári, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="naoquero">Tem algo que definitivamente não quer fazer?</label>
+                        <textarea id="naoquero" name="naoquero" placeholder="Ex: Museus de guerra, comidas exóticas, longas caminhadas, etc."></textarea>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="button" class="next-step">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- ANTIGO PASSO 6, AGORA PASSO 7: Necessidades Especiais -->
+                <div class="form-step" data-step="7">
+                    <h2>Necessidades especiais</h2>
+                    <p>Para um roteiro seguro e confortável</p>
+                    <div class="form-group">
+                        <label for="alimentar">Restrição alimentar</label>
+                        <select id="alimentar" name="alimentar">
+                            <option value="Nenhuma">Nenhuma</option>
+                            <option value="Sem carne de porco">Sem carne de porco</option>
+                            <option value="Vegetariano">Vegetariano</option>
+                            <option value="Vegano">Vegano</option>
+                            <option value="Sem glúten">Sem glúten</option>
+                            <option value="Halal">Halal</option>
+                            <option value="Kosher">Kosher</option>
+                            <option value="Alergia a frutos do mar">Alergia a frutos do mar</option>
+                            <option value="Alergia a amendoim">Alergia a amendoim</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobilidade">Mobilidade / acessibilidade</label>
+                        <select id="mobilidade" name="mobilidade">
+                            <option value="Sem restrições">Sem restrições</option>
+                            <option value="Evita multidões">Evita multidões</option>
+                            <option value="Mobilidade reduzida">Mobilidade reduzida</option>
+                            <option value="Com bebê/carrinho">Com bebê/carrinho</option>
+                            <option value="Medo de alturas">Medo de alturas</option>
+                        </select>
+                    </div>
+                    <p class="error-message" id="form-error">⚠️ Erro ao enviar. Tente novamente.</p>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-step">← Voltar</button>
+                        <button type="submit">✈️ Enviar para a Belgitour</button>
+                    </div>
+                    <p style="text-align: center; font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;">Após o envio, nossa equipe irá preparar e revisar seu roteiro. Você receberá o código por WhatsApp.</p>
+                </div>
+            </form>
+
+            <div id="success-message" class="success-message">
+                <p>🎉</p>
+                <h2>Recebemos tudo!</h2>
+                <p>Suas informações foram enviadas para a equipe da Belgitour. Nossos especialistas irão preparar um roteiro exclusivo para você.</p>
+                <p>📲 Você receberá seu código de acesso por WhatsApp assim que o roteiro estiver pronto.</p>
+            </div>
+        </section>
+
+        <section id="admin-panel" style="display: none;">
+            <div class="roteiro-header">
+                <h1>BELGITOUR</h1>
+                <p>Painel Administrativo</p>
+            </div>
+
+            <form id="login-form">
+                <h2>Entrar</h2>
+                <div class="form-group">
+                    <label for="admin-password">Senha</label>
+                    <input type="password" id="admin-password" required>
+                </div>
+                <p class="error-message" id="login-error">Senha incorreta</p>
+                <button type="submit">Entrar</button>
+            </form>
+
+            <div id="admin-content" style="display: none;">
+                <div class="admin-status">
+                    <span class="dot"></span>
+                    <span>Painel ativo</span>
+                    <button type="button" id="logout-button" style="margin-left: auto; background-color: #f44336;">Sair</button>
+                </div>
+
+                <h2>Painel de Roteiros</h2>
+                <p>Gerencie os clientes, gere e aprove roteiros personalizados</p>
+
+                <div class="admin-url-config">
+                    <h3>⚙️ URL Apps Script</h3>
+                    <div class="form-group">
+                        <input type="text" id="apps-script-url" placeholder="Cole a URL do seu Google Apps Script aqui">
+                        <button type="button" id="save-url-button">Salvar</button>
+                    </div>
+                </div>
+
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <h4>Total de clientes</h4>
+                        <p id="total-clientes">—</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Aguardando roteiro</h4>
+                        <p id="aguardando-roteiro">—</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Gerados (revisão)</h4>
+                        <p id="gerados-revisao">—</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Aprovados</h4>
+                        <p id="aprovados">—</p>
+                    </div>
+                </div>
+
+                <h3>📋 Clientes</h3>
+                <button type="button" id="refresh-clients-button" style="margin-bottom: 1.5rem;">↻ Atualizar</button>
+                <ul id="client-list" class="client-list">
+                    <p style="text-align: center;">Carregando clientes...</p>
+                </ul>
+            </div>
+        </section>
+
+        <div id="roteiro-modal" class="roteiro-modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modal-title">Roteiro</h2>
+                <p id="modal-client-info" style="color:var(--light-text-color);margin-bottom:1rem;font-size:0.9em"></p>
+
+                <!-- Botão de gerar -->
+                <div style="margin-bottom:1rem">
+                    <button type="button" id="generate-roteiro-button" style="background-color:#2196F3;width:100%;justify-content:center;">
+                        ✨ Gerar Roteiro com IA (pode levar 30–90 seg para viagens longas)
+                    </button>
+                </div>
+
+                <label style="font-weight:bold">📝 Roteiro (edite livremente antes de aprovar):</label>
+                <textarea id="roteiro-text" style="min-height:350px;margin-top:0.5rem"></textarea>
+
+                <!-- Campo de Vouchers -->
+                <div style="margin-top:1.5rem">
+                    <label style="font-weight:bold">📄 Documentos, Vouchers & Links de Reserva:</label>
+                    <p style="font-size:0.85em;color:var(--light-text-color);margin-bottom:0.5rem">
+                        Cole aqui os links de reserva de hotel, vouchers de passeios, bilhetes, etc. — um por linha.<br>
+                        Exemplos: link do Google Drive, Booking.com, GetYourGuide, bilhete de trem...
+                    </p>
+                    <textarea id="vouchers-text" style="min-height:100px" placeholder="https://drive.google.com/... (voucher hotel)&#10;https://booking.com/... (reserva restaurante)&#10;https://getyourguide.com/... (passeio)"></textarea>
+                </div>
+
+                <div class="form-navigation" style="margin-top:1.5rem">
+                    <button type="button" id="save-roteiro-button">💾 Salvar alterações</button>
+                    <button type="button" id="approve-roteiro-button">✅ Aprovar e gerar código</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="access-roteiro" style="display: none;">
+            <div class="roteiro-header">
+                <h1>✈</h1>
+                <h2>Acessar meu roteiro</h2>
+                <p>Digite o código que a Belgitour enviou por WhatsApp</p>
+            </div>
+            <div class="form-group">
+                <label for="roteiro-code">Código do roteiro</label>
+                <input type="text" id="roteiro-code" placeholder="Ex: ABCD-1234" required style="text-transform:uppercase;letter-spacing:3px;font-size:1.2em;text-align:center">
+            </div>
+            <p class="error-message" id="roteiro-access-error">Erro ao buscar roteiro. Tente novamente.</p>
+            <button type="button" id="view-roteiro-button">✈️ Ver meu roteiro</button>
+            <p style="text-align: center; font-size: 0.9em; color: var(--light-text-color); margin-top: 1.5rem;">O código foi enviado pela equipe Belgitour após a revisão do seu roteiro.</p>
+
+            <div id="client-roteiro-view" style="display: none;">
+                <!-- Cabeçalho com imagem -->
+                <div id="roteiro-hero" style="margin-top:2rem;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.15)"></div>
+
+                <!-- Info resumo -->
+                <div id="roteiro-info-bar" style="display:flex;flex-wrap:wrap;gap:1rem;background:var(--secondary-color);border-radius:8px;padding:1rem 1.5rem;margin:1.5rem 0;font-size:0.95em"></div>
+
+                <!-- Abas de navegação -->
+                <div class="roteiro-nav" id="roteiro-tabs">
+                    <a href="javascript:void(0)" class="tab-link active" data-tab="tab-roteiro" onclick="showTab('tab-roteiro',this)">📅 Roteiro</a>
+                    <a href="javascript:void(0)" class="tab-link" data-tab="tab-docs" onclick="showTab('tab-docs',this)">📄 Documentos</a>
+                </div>
+
+                <!-- Tab Roteiro -->
+                <div id="tab-roteiro" class="tab-content">
+                    <div id="client-roteiro-display"></div>
+                </div>
+
+                <!-- Tab Documentos/Vouchers -->
+                <div id="tab-docs" class="tab-content" style="display:none">
+                    <div id="client-docs-display"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        /* Tabs */
+        .tab-link { padding: 8px 16px; border-radius: 5px 5px 0 0; border-bottom: 3px solid transparent; font-weight: bold; }
+        .tab-link.active { border-bottom-color: var(--primary-color); color: var(--primary-color); background: rgba(160,82,45,0.08); }
+        /* Roteiro formatado */
+        .roteiro-dia { background: #fff; border: 1px solid #e0e0e0; border-left: 4px solid var(--primary-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .roteiro-dia h2 { color: var(--primary-color); font-size: 1.3rem; margin: 0 0 0.8rem 0; }
+        .roteiro-dia h3 { color: #5a3010; font-size: 1rem; margin: 1rem 0 0.4rem 0; }
+        .roteiro-dia p { margin-bottom: 0.5rem; }
+        .roteiro-dia .dica { background: rgba(160,82,45,0.08); border-radius: 6px; padding: 0.5rem 0.8rem; font-size: 0.9em; color: #6b3a1f; margin: 0.4rem 0; }
+        .roteiro-dia a.maps-link { display: inline-flex; align-items: center; gap: 4px; color: var(--primary-color); font-size: 0.85em; font-weight: bold; text-decoration: none; background: rgba(160,82,45,0.1); padding: 3px 8px; border-radius: 4px; margin: 3px 0; }
+        .roteiro-dia a.maps-link:hover { background: rgba(160,82,45,0.2); }
+        .secao-final { background: #f9f5f0; border: 1px solid var(--secondary-color); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; }
+        .secao-final h2 { color: var(--primary-color); font-size: 1.1rem; margin: 0 0 0.8rem 0; }
+        .doc-card { background: #f8f8f8; border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .doc-card a { color: var(--primary-color); font-weight: bold; word-break: break-all; }
+        .dia-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; }
+        @media(max-width:600px) { .dia-img { height: 140px; } }
+    </style>
+
+    <script>
+        // ─── CONFIGURAÇÃO ───────────────────────────────────────
+        var SENHA_ADMIN_LOCAL = "belgitour2026"; // mesma do Code.gs
+        // ────────────────────────────────────────────────────────
+
+        function getAppsUrl() { return localStorage.getItem('appsScriptUrl') || ''; }
+
+        // ─── FORMULÁRIO ─────────────────────────────────────────
+        const form = document.getElementById('travel-form');
+        const formSteps = document.querySelectorAll('.form-step');
+        const progressBar = document.querySelector('.progress-bar');
+        const currentStepSpan = document.querySelector('.current-step');
+        const totalStepsSpan = document.querySelector('.total-steps');
+        const formErrorMessage = document.getElementById('form-error');
+        const successMessage = document.getElementById('success-message');
+
+        let currentStep = 0;
+        const totalSteps = formSteps.length;
+        totalStepsSpan.textContent = totalSteps;
+
+        function updateProgressBar() {
+            progressBar.style.width = `${(currentStep / (totalSteps - 1)) * 100}%`;
+            currentStepSpan.textContent = currentStep + 1;
+        }
+        function showStep(step) {
+            formSteps.forEach((s, i) => s.classList.toggle('active', i === step));
+            currentStep = step;
+            updateProgressBar();
+        }
+        function validateStep(step) {
+            const inputs = formSteps[step].querySelectorAll('input[required], select[required], textarea[required]');
+            return Array.from(inputs).every(i => i.value.trim());
+        }
+
+        form.addEventListener('click', (e) => {
+            if (e.target.classList.contains('next-step')) {
+                if (validateStep(currentStep)) { showStep(currentStep + 1); formErrorMessage.style.display = 'none'; }
+                else { formErrorMessage.textContent = '⚠️ Preencha todos os campos obrigatórios.'; formErrorMessage.style.display = 'block'; }
+            } else if (e.target.classList.contains('prev-step')) {
+                showStep(currentStep - 1);
+                formErrorMessage.style.display = 'none';
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateStep(currentStep)) { formErrorMessage.textContent = '⚠️ Preencha todos os campos.'; formErrorMessage.style.display = 'block'; return; }
+            formErrorMessage.style.display = 'none';
+
+            const url = getAppsUrl();
+            if (!url) { formErrorMessage.textContent = '⚠️ Sistema em configuração. Entre em contato com a Belgitour.'; formErrorMessage.style.display = 'block'; return; }
+
+            const fd = new FormData(form);
+            const data = { action: 'enviarFormulario' };
+            for (let [k, v] of fd.entries()) {
+                if (k === 'interesses' || k === 'locomocao') {
+                    if (!data[k]) data[k] = [];
+                    data[k].push(v);
+                } else { data[k] = v; }
+            }
+            if (data.interesses) data.interesses = data.interesses.join(', ');
+            if (data.locomocao)  data.locomocao  = data.locomocao.join(', ');
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true; submitBtn.textContent = '⏳ Enviando...';
+
+            try {
+                const res = await fetch(url, { method:'POST', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(data) });
+                const r = await res.json();
+                if (r.sucesso) {
+                    form.reset(); formSteps.forEach(s => s.classList.remove('active'));
+                    successMessage.style.display = 'block'; progressBar.style.width = '100%';
+                } else { formErrorMessage.textContent = '⚠️ ' + (r.erro || 'Tente novamente.'); formErrorMessage.style.display = 'block'; }
+            } catch(err) { formErrorMessage.textContent = '⚠️ Erro de conexão: ' + err.message; formErrorMessage.style.display = 'block'; }
+
+            submitBtn.disabled = false; submitBtn.textContent = '✈️ Enviar para a Belgitour';
+        });
+
+        showStep(0);
+
+        // ─── PAINEL ADMIN ───────────────────────────────────────
+        const adminPanel    = document.getElementById('admin-panel');
+        const loginForm     = document.getElementById('login-form');
+        const adminContent  = document.getElementById('admin-content');
+        const logoutButton  = document.getElementById('logout-button');
+        const clientList    = document.getElementById('client-list');
+        const appsUrlInput  = document.getElementById('apps-script-url');
+        const saveUrlBtn    = document.getElementById('save-url-button');
+        const roteiroModal  = document.getElementById('roteiro-modal');
+        const roteiroTxt    = document.getElementById('roteiro-text');
+        const vouchersTxt   = document.getElementById('vouchers-text');
+        const saveBtn       = document.getElementById('save-roteiro-button');
+        const approveBtn    = document.getElementById('approve-roteiro-button');
+        const generateBtn   = document.getElementById('generate-roteiro-button');
+
+        var currentClientIdx  = null;
+        var currentClientData = null;
+
+        function loadAppsScriptUrl() {
+            const saved = localStorage.getItem('appsScriptUrl');
+            if (saved && appsUrlInput) appsUrlInput.value = saved;
+        }
+
+        saveUrlBtn && saveUrlBtn.addEventListener('click', () => {
+            const u = appsUrlInput.value.trim();
+            if (u) { localStorage.setItem('appsScriptUrl', u); alert('✅ URL salva!'); }
+        });
+
+        loginForm && loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const pw  = document.getElementById('admin-password').value;
+            const url = getAppsUrl();
+            if (!url) { document.getElementById('login-error').textContent = 'Configure a URL do Apps Script antes de entrar.'; document.getElementById('login-error').style.display = 'block'; return; }
+            try {
+                const res = await fetch(`${url}?action=listarClientes&senha=${pw}`);
+                const r   = await res.json();
+                if (r.erro) { document.getElementById('login-error').textContent = r.erro; document.getElementById('login-error').style.display = 'block'; }
+                else {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminPassword', pw);
+                    loginForm.style.display = 'none';
+                    adminContent.style.display = 'block';
+                    document.getElementById('login-error').style.display = 'none';
+                    loadClients();
+                }
+            } catch(err) { document.getElementById('login-error').textContent = 'Erro: ' + err.message; document.getElementById('login-error').style.display = 'block'; }
+        });
+
+        logoutButton && logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('adminLoggedIn'); localStorage.removeItem('adminPassword');
+            document.getElementById('admin-password').value = '';
+            adminContent.style.display = 'none'; loginForm.style.display = 'block';
+        });
+
+        document.getElementById('refresh-clients-button') && document.getElementById('refresh-clients-button').addEventListener('click', loadClients);
+
+        async function loadClients() {
+            clientList.innerHTML = '<p style="text-align:center">Carregando...</p>';
+            const pw  = localStorage.getItem('adminPassword');
+            const url = getAppsUrl();
+            if (!pw || !url) { logoutButton.click(); return; }
+            try {
+                const res = await fetch(`${url}?action=listarClientes&senha=${pw}`);
+                const r   = await res.json();
+                if (r.erro) { alert(r.erro); logoutButton.click(); return; }
+
+                clientList.innerHTML = '';
+                let tot=0, pend=0, ger=0, aprov=0;
+                const clientes = r.clientes || [];
+
+                if (!clientes.length) { clientList.innerHTML = '<p style="text-align:center">Nenhum cliente ainda.</p>'; }
+
+                clientes.forEach(c => {
+                    tot++; if(c.status==='PENDENTE') pend++; if(c.status==='GERADO') ger++; if(c.status==='APROVADO') aprov++;
+                    const li = document.createElement('li');
+                    li.className = 'client-item';
+                    li._clienteData = c;
+                    li.innerHTML = `
+                        <p><strong>Nome:</strong> ${c.nome}</p>
+                        <p><strong>Destino:</strong> ${c.destino} &nbsp;|&nbsp; <strong>Período:</strong> ${c.dataIda} a ${c.dataVolta}</p>
+                        <p><strong>Locomoção:</strong> ${c.locomocao || '—'} &nbsp;|&nbsp; <strong>Acomodação:</strong> ${c.acomodacao || '—'}</p>
+                        <p><strong>Status:</strong> <span class="status status-${c.status}">${c.status}</span></p>
+                        <div class="client-actions">
+                            <button class="open-modal-btn" data-idx="${c.idx}">📝 Ver / Editar / Gerar Roteiro</button>
+                            ${c.status==='APROVADO' ? `<button class="copy-code-btn" data-codigo="${c.codigo}">📋 Código: ${c.codigo}</button>` : ''}
+                        </div>`;
+                    clientList.appendChild(li);
+                });
+
+                document.getElementById('total-clientes').textContent   = tot;
+                document.getElementById('aguardando-roteiro').textContent = pend;
+                document.getElementById('gerados-revisao').textContent   = ger;
+                document.getElementById('aprovados').textContent         = aprov;
+
+            } catch(err) { alert('Erro: ' + err.message); logoutButton.click(); }
+        }
+
+        clientList && clientList.addEventListener('click', e => {
+            if (e.target.classList.contains('open-modal-btn')) {
+                const idx = e.target.dataset.idx;
+                const li  = Array.from(clientList.children).find(l => l.querySelector('.open-modal-btn') && l.querySelector('.open-modal-btn').dataset.idx === idx);
+                if (!li) return;
+                const c = li._clienteData;
+                currentClientIdx  = idx;
+                currentClientData = c;
+                document.getElementById('modal-title').textContent = 'Roteiro — ' + c.nome + ' — ' + c.destino;
+                document.getElementById('modal-client-info').textContent =
+                    c.dataIda + ' a ' + c.dataVolta + ' · ' + c.viajantes + ' · ' + (c.quemVai||'') + ' · ' + (c.estilo||'');
+                roteiroTxt.value  = c.roteiro  || '';
+                vouchersTxt.value = c.vouchers || '';
+                approveBtn.disabled = (c.status === 'APROVADO');
+                roteiroModal.classList.add('active');
+
+            } else if (e.target.classList.contains('copy-code-btn')) {
+                navigator.clipboard.writeText(e.target.dataset.codigo).then(() => alert('✅ Código copiado: ' + e.target.dataset.codigo));
+            }
+        });
+
+        // Fechar modal
+        roteiroModal && roteiroModal.querySelector('.close-button').addEventListener('click', () => { roteiroModal.classList.remove('active'); });
+        window.addEventListener('click', e => { if (e.target === roteiroModal) roteiroModal.classList.remove('active'); });
+
+        // Gerar roteiro com IA
+        generateBtn && generateBtn.addEventListener('click', async () => {
+            if (!currentClientData) return;
+            if (!confirm('Gerar roteiro com IA para ' + currentClientData.nome + '?\n\nIsso pode levar 30 a 90 segundos para viagens longas.')) return;
+
+            generateBtn.disabled = true;
+            generateBtn.textContent = '⏳ Gerando... aguarde (pode levar 1 minuto para viagens longas)';
+            roteiroTxt.value = '⏳ Gerando roteiro dia a dia com IA Belgitour...\n\nAguarde — para viagens de 10+ dias isso pode levar até 90 segundos.';
+
+            const pw  = localStorage.getItem('adminPassword');
+            const url = getAppsUrl();
+            try {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'gerarRoteiro', senha: pw, idx: currentClientIdx, cliente: currentClientData })
+                });
+                const r = await res.json();
+                if (r.sucesso) {
+                    roteiroTxt.value = r.roteiro;
+                    currentClientData.roteiro = r.roteiro;
+                    alert('✅ Roteiro gerado! Revise, edite e depois clique em Aprovar.');
+                    loadClients();
+                } else { roteiroTxt.value = ''; alert('❌ Erro: ' + (r.erro || 'Tente novamente.')); }
+            } catch(err) { alert('❌ Erro de conexão: ' + err.message); }
+
+            generateBtn.disabled = false;
+            generateBtn.textContent = '✨ Gerar Roteiro com IA (pode levar 30–90 seg para viagens longas)';
+        });
+
+        // Salvar roteiro
+        saveBtn && saveBtn.addEventListener('click', async () => {
+            if (!currentClientIdx) return;
+            const pw  = localStorage.getItem('adminPassword');
+            const url = getAppsUrl();
+            try {
+                const res = await fetch(url, { method:'POST', headers:{'Content-Type':'text/plain'}, body: JSON.stringify({ action:'salvarRoteiro', senha:pw, idx:currentClientIdx, roteiro:roteiroTxt.value, vouchers:vouchersTxt.value }) });
+                const r   = await res.json();
+                if (r.sucesso) { alert('✅ Salvo!'); roteiroModal.classList.remove('active'); loadClients(); }
+                else alert('❌ ' + r.erro);
+            } catch(err) { alert('❌ Erro: ' + err.message); }
+        });
+
+        // Aprovar roteiro
+        approveBtn && approveBtn.addEventListener('click', async () => {
+            if (!currentClientIdx) return;
+            if (!confirm('Aprovar o roteiro e gerar o código de acesso para o cliente?')) return;
+            const pw  = localStorage.getItem('adminPassword');
+            const url = getAppsUrl();
+            try {
+                const res = await fetch(url, { method:'POST', headers:{'Content-Type':'text/plain'}, body: JSON.stringify({ action:'aprovarRoteiro', senha:pw, idx:currentClientIdx, roteiro:roteiroTxt.value, vouchers:vouchersTxt.value }) });
+                const r   = await res.json();
+                if (r.sucesso) {
+                    alert('🎉 APROVADO!\n\nCódigo gerado: ' + r.codigo + '\n\nEnvie esse código para o cliente por WhatsApp.');
+                    roteiroModal.classList.remove('active');
+                    loadClients();
+                } else alert('❌ ' + r.erro);
+            } catch(err) { alert('❌ Erro: ' + err.message); }
+        });
+
+        // ─── ROTEIRO DO CLIENTE ──────────────────────────────────
+        const viewRoteiroBtn  = document.getElementById('view-roteiro-button');
+        const roteiroCodeInput = document.getElementById('roteiro-code');
+        const roteiroAccessErr = document.getElementById('roteiro-access-error');
+        const clientRoteiroView = document.getElementById('client-roteiro-view');
+
+        // Formatar código automaticamente
+        roteiroCodeInput && roteiroCodeInput.addEventListener('input', function() {
+            var v = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+            if (v.length > 4) v = v.slice(0,4) + '-' + v.slice(4,8);
+            this.value = v;
+        });
+        roteiroCodeInput && roteiroCodeInput.addEventListener('keydown', e => { if(e.key==='Enter') viewRoteiroBtn.click(); });
+
+        viewRoteiroBtn && viewRoteiroBtn.addEventListener('click', async () => {
+            const codigo = roteiroCodeInput.value.trim();
+            if (!codigo) { roteiroAccessErr.textContent = '⚠️ Digite o código do roteiro.'; roteiroAccessErr.style.display = 'block'; return; }
+            const url = getAppsUrl();
+            if (!url) { roteiroAccessErr.textContent = '⚠️ Entre em contato com a Belgitour.'; roteiroAccessErr.style.display = 'block'; return; }
+
+            viewRoteiroBtn.disabled = true; viewRoteiroBtn.textContent = '⏳ Buscando...';
+            roteiroAccessErr.style.display = 'none';
+
+            try {
+                const res = await fetch(`${url}?action=buscarRoteiro&codigo=${encodeURIComponent(codigo)}`);
+                const r   = await res.json();
+
+                if (r.sucesso) {
+                    renderRoteiroCliente(r);
+                    clientRoteiroView.style.display = 'block';
+                    roteiroAccessErr.style.display = 'none';
+                    clientRoteiroView.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    roteiroAccessErr.textContent = '⚠️ ' + r.erro;
+                    roteiroAccessErr.style.display = 'block';
+                    clientRoteiroView.style.display = 'none';
+                }
+            } catch(err) {
+                roteiroAccessErr.textContent = '⚠️ Erro de conexão: ' + err.message;
+                roteiroAccessErr.style.display = 'block';
+            }
+
+            viewRoteiroBtn.disabled = false; viewRoteiroBtn.textContent = '✈️ Ver meu roteiro';
+        });
+
+        // ─── RENDERIZAR ROTEIRO COM IMAGENS E FORMATAÇÃO ─────────
+        function renderRoteiroCliente(r) {
+            var destino   = r.destino || 'Seu Destino';
+            var keyword   = encodeURIComponent(destino.split(',')[0].trim() + ' travel');
+
+            // Hero com imagem do destino
+            var hero = document.getElementById('roteiro-hero');
+            if (hero) {
+                hero.innerHTML =
+                    '<img src="https://source.unsplash.com/featured/900x350?' + keyword + '" ' +
+                    'alt="' + destino + '" ' +
+                    'style="width:100%;height:260px;object-fit:cover;display:block" ' +
+                    'onerror="this.style.display=\'none\'">' +
+                    '<div style="background:linear-gradient(135deg,var(--primary-color),#8B4513);color:#fff;padding:1.5rem 2rem">' +
+                    '<h1 style="font-family:Playfair Display,serif;font-size:2rem;margin:0">' + destino + '</h1>' +
+                    '<p style="margin:0.3rem 0 0;opacity:0.9">Roteiro exclusivo Belgitour · ' + r.nome + '</p>' +
+                    '</div>';
+            }
+
+            // Barra de info
+            var infoBar = document.getElementById('roteiro-info-bar');
+            if (infoBar) {
+                infoBar.innerHTML =
+                    '<span>📅 <strong>' + r.dataIda + '</strong> a <strong>' + r.dataVolta + '</strong></span>' +
+                    '<span>👥 ' + r.viajantes + '</span>' +
+                    '<span>✅ Aprovado pela Belgitour</span>';
+            }
+
+            // Formatar o texto do roteiro em HTML rico
+            var display = document.getElementById('client-roteiro-display');
+            if (display) display.innerHTML = formatarRoteiro(r.roteiro, destino);
+
+            // Documentos/Vouchers
+            var docsEl = document.getElementById('client-docs-display');
+            if (docsEl) {
+                if (r.vouchers && r.vouchers.trim()) {
+                    var links = r.vouchers.split('\n').filter(l => l.trim());
+                    var docsHtml = '<h2 style="color:var(--primary-color)">📄 Seus Documentos & Reservas</h2>' +
+                        '<p style="color:var(--light-text-color);margin-bottom:1.5rem">Clique para abrir cada documento. Recomendamos salvar offline.</p>';
+                    links.forEach(function(link, i) {
+                        var l = link.trim();
+                        var label = 'Documento ' + (i+1);
+                        if (l.includes('drive.google')) label = '📁 Google Drive — Documento ' + (i+1);
+                        else if (l.includes('booking')) label = '🏨 Reserva de Hotel';
+                        else if (l.includes('getyourguide') || l.includes('viator')) label = '🎫 Passeio / Excursão';
+                        else if (l.includes('airbnb')) label = '🏠 Airbnb';
+                        else if (l.includes('vueling') || l.includes('tap') || l.includes('ryanair') || l.includes('latam') || l.includes('gol')) label = '✈️ Passagem Aérea';
+                        docsHtml += '<div class="doc-card"><span style="font-size:1.5em">📎</span><div><strong>' + label + '</strong><br><a href="' + l + '" target="_blank">' + l + '</a></div></div>';
+                    });
+                    docsEl.innerHTML = docsHtml;
+                } else {
+                    docsEl.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--light-text-color)"><p style="font-size:3rem">📭</p><p>Nenhum documento ou voucher adicionado ainda.<br>Entre em contato com a Belgitour se precisar de algo.</p></div>';
+                }
+            }
+        }
+
+        function formatarRoteiro(texto, destino) {
+            if (!texto) return '<p>Roteiro não disponível. Entre em contato com a Belgitour.</p>';
+
+            var html = '';
+            var linhas = texto.split('\n');
+            var diaAberto = false;
+            var secaoFinalAberta = false;
+            var diaNumero = 0;
+
+            function fecharDia() { if (diaAberto) { html += '</div>'; diaAberto = false; } }
+            function fecharSecao() { if (secaoFinalAberta) { html += '</div>'; secaoFinalAberta = false; } }
+
+            var SECOES_FINAIS = ['CHECKLIST', 'DICAS ESSENCIAIS', 'ORÇAMENTO', 'FRASES ÚTEIS', 'EMERGÊNCIA', 'APPS', 'GASTRONOMIA', 'EXPERIÊNCIAS', 'COSTUMES'];
+
+            linhas.forEach(function(linha) {
+                var l = linha.trim();
+                if (!l || l === '---') return;
+
+                // DIA X — CIDADE | TÍTULO
+                if (/^(═+|DIA\s+\d+)/i.test(l) && l.toUpperCase().includes('DIA')) {
+                    fecharDia(); fecharSecao();
+                    diaNumero++;
+                    var keyword2 = encodeURIComponent(destino.split(',')[0].trim() + ' ' + diaNumero);
+                    html += '<div class="roteiro-dia">';
+                    html += '<img class="dia-img" src="https://source.unsplash.com/featured/700x200?' + keyword2 + '" alt="Dia ' + diaNumero + '" onerror="this.style.display=\'none\'">';
+                    html += '<h2>' + l + '</h2>';
+                    diaAberto = true;
+                    return;
+                }
+
+                // Separadores
+                if (/^═+$/.test(l) || /^─+$/.test(l)) return;
+
+                // Seções finais
+                var ehSecaoFinal = SECOES_FINAIS.some(function(s) { return l.toUpperCase().includes(s); });
+                if (ehSecaoFinal && !diaAberto) {
+                    fecharSecao();
+                    html += '<div class="secao-final"><h2>' + l + '</h2>';
+                    secaoFinalAberta = true;
+                    return;
+                }
+                if (ehSecaoFinal && diaAberto) {
+                    fecharDia();
+                    html += '<div class="secao-final"><h2>' + l + '</h2>';
+                    secaoFinalAberta = true;
+                    return;
+                }
+
+                // Subseções (🌅 MANHÃ, ☕ ALMOÇO, etc.)
+                if (/^[🌅☕☀️🍽️🌙💡✅💰🗣️🚨📱🍺🏛️⚠️]/.test(l) && l.length < 60) {
+                    html += '<h3>' + l + '</h3>';
+                    return;
+                }
+
+                // Dica do Renan
+                if (l.includes('Dica do Renan')) {
+                    html += '<div class="dica">💡 ' + l + '</div>';
+                    return;
+                }
+
+                // Links do Google Maps
+                if (l.includes('google.com/maps') || (l.startsWith('📍') && l.includes('http'))) {
+                    var urlMatch = l.match(/(https?:\/\/[^\s]+)/);
+                    if (urlMatch) {
+                        html += '<a class="maps-link" href="' + urlMatch[1] + '" target="_blank">📍 Ver no Google Maps</a>';
+                    }
+                    return;
+                }
+
+                // Bullets (•, -, ✓, ✔)
+                if (/^[•\-✓✔]/.test(l)) {
+                    html += '<p>' + processarTexto(l) + '</p>';
+                    return;
+                }
+
+                // Texto normal
+                if (l) html += '<p>' + processarTexto(l) + '</p>';
+            });
+
+            fecharDia(); fecharSecao();
+            return html || '<p>' + texto.replace(/\n/g, '<br>') + '</p>';
+        }
+
+        function processarTexto(texto) {
+            // Links
+            texto = texto.replace(/(https?:\/\/www\.google\.com\/maps[^\s]+)/g,
+                '<a class="maps-link" href="$1" target="_blank">📍 Ver no mapa</a>');
+            // Bold **texto**
+            texto = texto.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            // Negrito com nomes de locais (heurística)
+            return texto;
+        }
+
+        // ─── TABS ────────────────────────────────────────────────
+        function showTab(tabId, linkEl) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+            var el = document.getElementById(tabId);
+            if (el) el.style.display = 'block';
+            if (linkEl) linkEl.classList.add('active');
+        }
+
+        // ─── ROTEAMENTO (hash) ───────────────────────────────────
+        function handleHashChange() {
+            var hash = window.location.hash;
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            if (hash === '#painel') {
+                adminPanel.style.display = 'block';
+                loadAppsScriptUrl();
+                if (localStorage.getItem('adminLoggedIn') === 'true') {
+                    loginForm.style.display = 'none';
+                    adminContent.style.display = 'block';
+                    loadClients();
+                } else {
+                    loginForm.style.display = 'block';
+                    adminContent.style.display = 'none';
+                }
+            } else if (hash === '#roteiro') {
+                document.getElementById('access-roteiro').style.display = 'block';
+            } else {
+                document.getElementById('form-section').style.display = 'block';
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+    </script>
+</body>
+</html>
