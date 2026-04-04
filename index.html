@@ -1372,8 +1372,7 @@ https://booking.com/…"></textarea>
 // ══════════════════════════════════════════════════════════
 // CONFIG
 // ══════════════════════════════════════════════════════════
-var DEFAULT_APPS_URL = 'https://script.google.com/macros/s/AKfycbz_9e5n4E2vj5FmK1wP4kRkG7o7kKq4t9r8H3y2s1wXzC7v6B5a4D3c2b1/exec'; // Use a sua URL mais recente aqui
-// A senha do admin não é mais necessária aqui, pois será enviada em cada requisição
+var DEFAULT_APPS_URL = 'https://script.google.com/macros/s/AKfycbyrIgrWIaeju_kKAqHbuMQgZkmFZa_Bt9ARKueF8hAsMXSYtCqa3dRDCEc9ssXwYC0uDw/exec';
 
 function getAppsUrl() {
     return localStorage.getItem('appsScriptUrl') || DEFAULT_APPS_URL;
@@ -1488,7 +1487,8 @@ formEl.addEventListener('submit', async function(e) {
     try {
         var res = await fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data) // Não precisa de 'headers' ou 'text/plain', o Google Script lida com isso
+            body: JSON.stringify(data),
+            redirect: 'follow' // Adicionado para seguir redirecionamentos
         });
         var r = await res.json();
         if (r.sucesso) {
@@ -1508,16 +1508,17 @@ formEl.addEventListener('submit', async function(e) {
 showStep(0);
 
 // ══════════════════════════════════════════════════════════
-// FUNÇÃO CENTRAL DE COMUNICAÇÃO COM O GOOGLE SCRIPT
+// FUNÇÃO CENTRAL DE COMUNICAÇÃO COM O GOOGLE SCRIPT (CORRIGIDO)
 // ══════════════════════════════════════════════════════════
 async function apiCall(payload) {
     const url = getAppsUrl();
     try {
         const response = await fetch(url, {
             method: 'POST',
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
+            redirect: 'follow' // <<< CORREÇÃO PRINCIPAL AQUI
         });
-        if (!response.ok) { // Captura erros de rede como 404, 500, etc.
+        if (!response.ok) {
             throw new Error(`Erro de rede: ${response.statusText}`);
         }
         return await response.json();
@@ -1528,7 +1529,7 @@ async function apiCall(payload) {
 }
 
 // ══════════════════════════════════════════════════════════
-// ADMIN — LOGIN
+// ADMIN — LOGIN (CORRIGIDO)
 // ══════════════════════════════════════════════════════════
 document.getElementById('login-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -1571,7 +1572,7 @@ document.getElementById('save-url-button').addEventListener('click', function() 
 });
 
 // ══════════════════════════════════════════════════════════
-// ADMIN — Clientes e Modal
+// ADMIN — Clientes e Modal (CORRIGIDO)
 // ══════════════════════════════════════════════════════════
 async function loadClients() {
     const pw = localStorage.getItem('adminPassword');
@@ -1704,7 +1705,6 @@ document.getElementById('view-roteiro-button').addEventListener('click', async f
     this.disabled = true;
     this.textContent = '⏳ Buscando…';
     
-    // Esta chamada usa GET, então não precisa da função `apiCall`
     try {
         var url = getAppsUrl();
         var res = await fetch(url + '?action=buscarRoteiro&codigo=' + encodeURIComponent(codigo));
