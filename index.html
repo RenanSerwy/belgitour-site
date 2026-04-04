@@ -1463,7 +1463,7 @@ formEl.addEventListener('click', function(e) {
     }
 });
 
-formEl.addEventListener('submit', async function(e) {
+formEl.addEventListener('submit', function(e) {
     e.preventDefault();
     if (!validateStep(currentStep)) { showErr(currentStep, '⚠ Preencha todos os campos obrigatórios.'); return; }
     var url = getAppsUrl();
@@ -1484,13 +1484,8 @@ formEl.addEventListener('submit', async function(e) {
     submitBtn.disabled = true;
     submitBtn.textContent = '⏳ Enviando…';
 
-    try {
-        var res = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            redirect: 'follow'
-        });
-        var r = await res.json();
+    // *** Usando o método alternativo ***
+    apiCall(data, function(r) {
         if (r.sucesso) {
             formEl.style.display = 'none';
             document.querySelector('.progress-wrap').style.display = 'none';
@@ -1498,57 +1493,78 @@ formEl.addEventListener('submit', async function(e) {
         } else {
             showErr(currentStep, '⚠ ' + (r.erro || 'Erro ao enviar. Tente novamente.'));
         }
-    } catch(err) {
-        showErr(currentStep, '⚠ Erro de conexão: ' + err.message);
-    }
-    submitBtn.disabled = false;
-    submitBtn.textContent = '✈ Enviar para a Belgitour';
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✈ Enviar para a Belgitour';
+    }, function(err) {
+        showErr(currentStep, '⚠ Erro de conexão: ' + err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✈ Enviar para a Belgitour';
+    });
 });
 
 showStep(0);
 
 // ══════════════════════════════════════════════════════════
-// FUNÇÃO CENTRAL DE COMUNICAÇÃO COM O GOOGLE SCRIPT
+// FUNÇÃO CENTRAL DE COMUNICAÇÃO (MÉTODO À PROVA DE FALHAS)
 // ══════════════════════════════════════════════════════════
-async function apiCall(payload) {
-    const url = getAppsUrl();
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(payload),
-            redirect: 'follow' // <<< A CORREÇÃO
-        });
-        if (!response.ok) {
-            throw new Error(`Erro de rede: ${response.status} ${response.statusText}`);
+function apiCall(payload, successCallback, errorCallback) {
+    var url = getAppsUrl();
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    // O Apps Script às vezes retorna JSON dentro de uma string de texto,
+                    // então precisamos extrair o JSON.
+                    var responseText = xhr.responseText;
+                    var jsonMatch = responseText.match(/({.*})/);
+                    var jsonResponse = jsonMatch ? JSON.parse(jsonMatch[1]) : JSON.parse(responseText);
+                    successCallback(jsonResponse);
+                } catch (e) {
+                    errorCallback('Erro ao processar a resposta do servidor.');
+                }
+            } else {
+                errorCallback('Erro do servidor: ' + xhr.status);
+            }
         }
-        return await response.json();
-    } catch (err) {
-        console.error("API Call Error:", err);
-        return { sucesso: false, erro: `Erro de conexão: ${err.message}` };
-    }
+    };
+    
+    xhr.onerror = function() {
+        errorCallback('Erro de conexão de rede.');
+    };
+    
+    // O XMLHttpRequest não envia JSON diretamente, então empacotamos o payload
+    var encodedData = "payload=" + encodeURIComponent(JSON.stringify(payload));
+    xhr.send(encodedData);
 }
 
 // ══════════════════════════════════════════════════════════
 // ADMIN — LOGIN
 // ══════════════════════════════════════════════════════════
-document.getElementById('login-form').addEventListener('submit', async function(e) {
+document.getElementById('login-form').addEventListener('submit', function(e) {
     e.preventDefault();
     var pw  = document.getElementById('admin-password').value;
     var loginError = document.getElementById('login-error');
     loginError.style.display = 'none';
 
-    var r = await apiCall({ action: 'listarClientes', senha: pw });
-
-    if (r.sucesso) {
-        localStorage.setItem('adminLoggedIn', 'true');
-        localStorage.setItem('adminPassword', pw);
-        document.getElementById('login-form-box').style.display = 'none';
-        document.getElementById('admin-content').style.display = 'block';
-        renderClients(r.clientes);
-    } else {
-        loginError.textContent = r.erro || 'Senha incorreta ou erro de conexão.';
+    apiCall({ action: 'listarClientes', senha: pw }, function(r) {
+        if (r.sucesso) {
+            localStorage.setItem('adminLoggedIn', 'true');
+            localStorage.setItem('adminPassword', pw);
+            document.getElementById('login-form-box').style.display = 'none';
+            document.getElementById('admin-content').style.display = 'block';
+            renderClients(r.clientes);
+        } else {
+            loginError.textContent = r.erro || 'Senha incorreta ou erro de conexão.';
+            loginError.style.display = 'block';
+        }
+    }, function(err) {
+        loginError.textContent = 'Erro de comunicação: ' + err;
         loginError.style.display = 'block';
-    }
+    });
 });
 
 document.getElementById('logout-button').addEventListener('click', function() {
@@ -1574,16 +1590,19 @@ document.getElementById('save-url-button').addEventListener('click', function() 
 // ══════════════════════════════════════════════════════════
 // ADMIN — Clientes e Modal
 // ══════════════════════════════════════════════════════════
-async function loadClients() {
+function loadClients() {
     const pw = localStorage.getItem('adminPassword');
     if (!pw) { document.getElementById('logout-button').click(); return; }
 
-    var r = await apiCall({ action: 'listarClientes', senha: pw });
-    if (r.sucesso) {
-        renderClients(r.clientes);
-    } else {
-        document.getElementById('client-list').innerHTML = `<p style="color:var(--err);font-size:0.85rem">${r.erro}</p>`;
-    }
+    apiCall({ action: 'listarClientes', senha: pw }, function(r) {
+        if (r.sucesso) {
+            renderClients(r.clientes);
+        } else {
+            document.getElementById('client-list').innerHTML = `<p style="color:var(--err);font-size:0.85rem">${r.erro}</p>`;
+        }
+    }, function(err) {
+        document.getElementById('client-list').innerHTML = `<p style="color:var(--err);font-size:0.85rem">Erro ao carregar: ${err}</p>`;
+    });
 }
 
 function renderClients(clientes) {
@@ -1630,71 +1649,83 @@ var currentClientIdx  = null;
 var currentClientData = null;
 var roteiroModal      = document.getElementById('roteiro-modal');
 
-async function openModal(idx) {
+function openModal(idx) {
     currentClientIdx = idx;
     const pw = localStorage.getItem('adminPassword');
     if (!pw) { document.getElementById('logout-button').click(); return; }
 
-    var r = await apiCall({ action: 'listarClientes', senha: pw });
-    if (r.sucesso) {
-        var c = r.clientes.find(x => x.idx == idx);
-        if (!c) { alert('Cliente não encontrado.'); return; }
-        currentClientData = c;
-        document.getElementById('modal-title').textContent = c.nome || 'Roteiro';
-        document.getElementById('modal-client-info').textContent = `${c.destino || ''} · ${c.dataida || c.datadeida || ''} a ${c.datavolta || ''}`;
-        document.getElementById('roteiro-text').value = c.roteiro || '';
-        document.getElementById('vouchers-text').value = c.vouchers || '';
-        roteiroModal.classList.add('open');
-    } else {
-        alert('Erro ao abrir cliente: ' + r.erro);
-    }
+    apiCall({ action: 'listarClientes', senha: pw }, function(r) {
+        if (r.sucesso) {
+            var c = r.clientes.find(x => x.idx == idx);
+            if (!c) { alert('Cliente não encontrado.'); return; }
+            currentClientData = c;
+            document.getElementById('modal-title').textContent = c.nome || 'Roteiro';
+            document.getElementById('modal-client-info').textContent = `${c.destino || ''} · ${c.dataida || c.datadeida || ''} a ${c.datavolta || ''}`;
+            document.getElementById('roteiro-text').value = c.roteiro || '';
+            document.getElementById('vouchers-text').value = c.vouchers || '';
+            roteiroModal.classList.add('open');
+        } else {
+            alert('Erro ao abrir cliente: ' + r.erro);
+        }
+    }, function(err) {
+        alert('Erro de comunicação: ' + err);
+    });
 }
 
 document.getElementById('modal-close-btn').addEventListener('click', function() { roteiroModal.classList.remove('open'); });
 roteiroModal.addEventListener('click', function(e) { if (e.target === roteiroModal) roteiroModal.classList.remove('open'); });
 
-document.getElementById('generate-roteiro-button').addEventListener('click', async function() {
+document.getElementById('generate-roteiro-button').addEventListener('click', function() {
     if (!currentClientData) return;
     const pw = localStorage.getItem('adminPassword');
     var btn = this;
     btn.disabled = true;
     btn.textContent = '⏳ Gerando roteiro… aguarde (pode levar até 90 seg)';
     
-    var r = await apiCall({ action: 'gerarRoteiro', senha: pw, cliente: currentClientData });
-    
-    if (r.sucesso) { document.getElementById('roteiro-text').value = r.roteiro; }
-    else { alert('Erro ao gerar: ' + r.erro); }
-    
-    btn.disabled = false;
-    btn.textContent = '✨ Gerar Roteiro Automaticamente (pode levar 30–90 seg)';
+    apiCall({ action: 'gerarRoteiro', senha: pw, cliente: currentClientData }, function(r) {
+        if (r.sucesso) { document.getElementById('roteiro-text').value = r.roteiro; }
+        else { alert('Erro ao gerar: ' + r.erro); }
+        btn.disabled = false;
+        btn.textContent = '✨ Gerar Roteiro Automaticamente (pode levar 30–90 seg)';
+    }, function(err) {
+        alert('Erro de comunicação: ' + err);
+        btn.disabled = false;
+        btn.textContent = '✨ Gerar Roteiro Automaticamente (pode levar 30–90 seg)';
+    });
 });
 
-document.getElementById('save-roteiro-button').addEventListener('click', async function() {
+document.getElementById('save-roteiro-button').addEventListener('click', function() {
     const pw = localStorage.getItem('adminPassword');
     var payload = { action: 'salvarRoteiro', senha: pw, idx: currentClientIdx, roteiro: document.getElementById('roteiro-text').value, vouchers: document.getElementById('vouchers-text').value };
-    var r = await apiCall(payload);
-    if (r.sucesso) { alert('✅ Salvo com sucesso!'); }
-    else { alert('Erro: ' + r.erro); }
+    apiCall(payload, function(r) {
+        if (r.sucesso) { alert('✅ Salvo com sucesso!'); }
+        else { alert('Erro: ' + r.erro); }
+    }, function(err) {
+        alert('Erro de comunicação: ' + err);
+    });
 });
 
-document.getElementById('approve-roteiro-button').addEventListener('click', async function() {
+document.getElementById('approve-roteiro-button').addEventListener('click', function() {
     if (!confirm('Aprovar este roteiro e enviar o código por e-mail ao cliente?')) return;
     const pw = localStorage.getItem('adminPassword');
     var payload = { action: 'aprovarRoteiro', senha: pw, idx: currentClientIdx, roteiro: document.getElementById('roteiro-text').value, vouchers: document.getElementById('vouchers-text').value };
-    var r = await apiCall(payload);
-    if (r.sucesso) {
-        alert(`✅ Roteiro aprovado! Código: ${r.codigo}\nO cliente foi notificado por e-mail.`);
-        roteiroModal.classList.remove('open');
-        loadClients();
-    } else {
-        alert('Erro: ' + r.erro);
-    }
+    apiCall(payload, function(r) {
+        if (r.sucesso) {
+            alert(`✅ Roteiro aprovado! Código: ${r.codigo}\nO cliente foi notificado por e-mail.`);
+            roteiroModal.classList.remove('open');
+            loadClients();
+        } else {
+            alert('Erro: ' + r.erro);
+        }
+    }, function(err) {
+        alert('Erro de comunicação: ' + err);
+    });
 });
 
 // ══════════════════════════════════════════════════════════
 // CLIENTE — Visualizar roteiro
 // ══════════════════════════════════════════════════════════
-document.getElementById('view-roteiro-button').addEventListener('click', async function() {
+document.getElementById('view-roteiro-button').addEventListener('click', function() {
     var codigo = document.getElementById('roteiro-code').value.trim().toUpperCase();
     var errEl  = document.getElementById('roteiro-access-error');
     var view   = document.getElementById('client-roteiro-view');
@@ -1705,24 +1736,40 @@ document.getElementById('view-roteiro-button').addEventListener('click', async f
     this.disabled = true;
     this.textContent = '⏳ Buscando…';
     
-    try {
-        var url = getAppsUrl();
-        var res = await fetch(url + '?action=buscarRoteiro&codigo=' + encodeURIComponent(codigo));
-        var r   = await res.json();
-        if (r.sucesso) {
-            view.style.display = 'block';
-            renderRoteiroCliente(r);
-        } else {
-            errEl.textContent = '⚠ ' + r.erro;
-            errEl.style.display = 'block';
+    var url = getAppsUrl();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url + '?action=buscarRoteiro&codigo=' + encodeURIComponent(codigo), true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            this.disabled = false;
+            this.textContent = '✈ Ver meu roteiro';
+            if (xhr.status === 200) {
+                try {
+                    var r = JSON.parse(xhr.responseText);
+                    if (r.sucesso) {
+                        view.style.display = 'block';
+                        renderRoteiroCliente(r);
+                    } else {
+                        errEl.textContent = '⚠ ' + r.erro;
+                        errEl.style.display = 'block';
+                    }
+                } catch(e) {
+                     errEl.textContent = '⚠ Erro ao processar resposta.';
+                     errEl.style.display = 'block';
+                }
+            } else {
+                errEl.textContent = '⚠ Erro de conexão: ' + xhr.status;
+                errEl.style.display = 'block';
+            }
         }
-    } catch(err) {
-        errEl.textContent = '⚠ Erro de conexão: ' + err.message;
+    }.bind(this);
+    xhr.onerror = function() {
+        this.disabled = false;
+        this.textContent = '✈ Ver meu roteiro';
+        errEl.textContent = '⚠ Erro de rede.';
         errEl.style.display = 'block';
-    }
-    
-    this.disabled = false;
-    this.textContent = '✈ Ver meu roteiro';
+    }.bind(this);
+    xhr.send();
 });
 
 function renderRoteiroCliente(r) {
