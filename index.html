@@ -1488,7 +1488,7 @@ formEl.addEventListener('submit', async function(e) {
         var res = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
-            redirect: 'follow' // Adicionado para seguir redirecionamentos
+            redirect: 'follow'
         });
         var r = await res.json();
         if (r.sucesso) {
@@ -1508,7 +1508,7 @@ formEl.addEventListener('submit', async function(e) {
 showStep(0);
 
 // ══════════════════════════════════════════════════════════
-// FUNÇÃO CENTRAL DE COMUNICAÇÃO COM O GOOGLE SCRIPT (CORRIGIDO)
+// FUNÇÃO CENTRAL DE COMUNICAÇÃO COM O GOOGLE SCRIPT
 // ══════════════════════════════════════════════════════════
 async function apiCall(payload) {
     const url = getAppsUrl();
@@ -1516,10 +1516,10 @@ async function apiCall(payload) {
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(payload),
-            redirect: 'follow' // <<< CORREÇÃO PRINCIPAL AQUI
+            redirect: 'follow' // <<< A CORREÇÃO
         });
         if (!response.ok) {
-            throw new Error(`Erro de rede: ${response.statusText}`);
+            throw new Error(`Erro de rede: ${response.status} ${response.statusText}`);
         }
         return await response.json();
     } catch (err) {
@@ -1529,7 +1529,7 @@ async function apiCall(payload) {
 }
 
 // ══════════════════════════════════════════════════════════
-// ADMIN — LOGIN (CORRIGIDO)
+// ADMIN — LOGIN
 // ══════════════════════════════════════════════════════════
 document.getElementById('login-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -1572,7 +1572,7 @@ document.getElementById('save-url-button').addEventListener('click', function() 
 });
 
 // ══════════════════════════════════════════════════════════
-// ADMIN — Clientes e Modal (CORRIGIDO)
+// ADMIN — Clientes e Modal
 // ══════════════════════════════════════════════════════════
 async function loadClients() {
     const pw = localStorage.getItem('adminPassword');
